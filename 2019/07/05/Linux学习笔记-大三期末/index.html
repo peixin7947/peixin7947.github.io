@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-big-counter.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Linux,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="白哥的博客" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="# Linux学习笔记 Linux简介Ken Thompson 与Dennis Ritchle用C语言重写了Unix的第三版内核。 Linux系统安装分区：Linux规定每一个硬盘设备最多能有4个主分区（其中包含扩展分区）。 现在基本上都是SATA接口，所以一般是/dev/sda1 1234是主分区保留的，逻辑分区只能从5开始。 格式化： 根据写入文件系统，把硬盘分成一个个带下的block，同时">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux学习笔记">
+<meta property="og:url" content="http://yoursite.com/2019/07/05/Linux学习笔记-大三期末/index.html">
+<meta property="og:site_name" content="白哥的博客">
+<meta property="og:description" content="# Linux学习笔记 Linux简介Ken Thompson 与Dennis Ritchle用C语言重写了Unix的第三版内核。 Linux系统安装分区：Linux规定每一个硬盘设备最多能有4个主分区（其中包含扩展分区）。 现在基本上都是SATA接口，所以一般是/dev/sda1 1234是主分区保留的，逻辑分区只能从5开始。 格式化： 根据写入文件系统，把硬盘分成一个个带下的block，同时">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190705094620386.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NDQ4NTc0,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190705094632582.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NDQ4NTc0,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019070509464682.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NDQ4NTc0,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190705094717834.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NDQ4NTc0,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019070509474218.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NDQ4NTc0,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-07-05T01:52:51.241Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux学习笔记">
+<meta name="twitter:description" content="# Linux学习笔记 Linux简介Ken Thompson 与Dennis Ritchle用C语言重写了Unix的第三版内核。 Linux系统安装分区：Linux规定每一个硬盘设备最多能有4个主分区（其中包含扩展分区）。 现在基本上都是SATA接口，所以一般是/dev/sda1 1234是主分区保留的，逻辑分区只能从5开始。 格式化： 根据写入文件系统，把硬盘分成一个个带下的block，同时">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190705094620386.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NDQ4NTc0,size_16,color_FFFFFF,t_70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'YQTYRQPKX7',
+      apiKey: '063bb125461fd4898a2d44f8eea9f5c3',
+      indexName: 'blogsearch',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"输入关键字","hits_empty":"没有找到与 ${query} 相关的内容","hits_stats":"${hits}条相关记录，共耗时${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/05/Linux学习笔记-大三期末/">
+
+
+
+
+
+  <title>Linux学习笔记 | 白哥的博客</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+	<a href="https://github.com/1069121849" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">白哥的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">白哥的博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/05/Linux学习笔记-大三期末/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="白哥">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="白哥的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux学习笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-05T09:51:32+08:00">
+                2019-07-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  10k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  37 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>﻿# Linux学习笔记</p>
+<h2 id="Linux简介"><a href="#Linux简介" class="headerlink" title="Linux简介"></a>Linux简介</h2><p>Ken Thompson 与Dennis Ritchle用C语言重写了Unix的第三版内核。</p>
+<h2 id="Linux系统安装"><a href="#Linux系统安装" class="headerlink" title="Linux系统安装"></a>Linux系统安装</h2><p><strong>分区</strong>：Linux规定每一个硬盘设备最多能有4个主分区（其中包含扩展分区）。</p>
+<p>现在基本上都是SATA接口，所以一般是/dev/sda1</p>
+<p>1234是主分区保留的，逻辑分区只能从5开始。</p>
+<p><strong>格式化</strong>：</p>
+<p>根据写入文件系统，把硬盘分成一个个带下的block，同时也建立一个iNode table。</p>
+<p><strong>扇区sector</strong>：每个扇区512byte。</p>
+<p><strong>块block</strong>：多个扇区组成，文件存取的最小单位，最常见的是4kB，即8个连续sector组成一个block，文件数据都存储在块中。</p>
+<p><strong>iNode</strong>：储存文件元信息的地方，iNode也叫“索引节点”</p>
+<p>查看文件的iNode命令：stat 文件名</p>
+<p>iNode的大小：</p>
+<p>格式化时候，操作系统自动将硬盘分成两个区域：</p>
+<ol>
+<li>数据区，存放文件数据</li>
+<li>iNode区，存放iNode包含的信息</li>
+</ol>
+<p>iNode节点大小：128或256byte，iNode节点总数，在格式化就给定，一般是每1kb或者2kb设计一个iNode</p>
+<p>查看每个硬盘分区的iNode总数和已经使用的数量，可以使用df命令：df -i</p>
+<p>每个iNode节点大小可以用如下命令：dumpe2fs -h /dev/had | grep “inode size”</p>
+<p>iNode的号码：</p>
+<p>每个iNode都有一个号码，操作系统用iNode号码来识别不同的文件，文件名是iNode号码便于识别的别称或绰号，表面上，用户通过文件名，区分文件。实际上，系统内部这个过程分成三步：首先，系统找到这个文件名对应的iNode号码；其次，通过iNode号码，获取iNode信息；最后，根据iNode信息，找到文件数据所在的block，读出数据。</p>
+<p>使用ls -i命令，可以查看文件名对应的iNode号码。</p>
+<p><strong>硬链接和软连接</strong>：</p>
+<p>多个文件名指向同一个iNode号码：硬链接</p>
+<p>文件A和文件B的iNode号码不一样，但是文件A的内容是B的路径。读取A的时候，系统自动将访问导向文件B，因此，不管打开哪个文件，最后读取的都是文件B。这时，文件A就是文件B的“软链接”或者“符号链接”。</p>
+<p><strong>挂载</strong>：把文件系统挂载到某个分区上，建立一个映射关系。挂载点必须是空目录</p>
+<p>分区：</p>
+<p>必须分区： /（根分区）；swap分区（交换分区，内存2倍，不超过2Gb）</p>
+<p>推荐分区：/boot（启动分区200MB）</p>
+<h2 id="Linux学习"><a href="#Linux学习" class="headerlink" title="Linux学习"></a>Linux学习</h2><h3 id="linux学习注意事项"><a href="#linux学习注意事项" class="headerlink" title="linux学习注意事项"></a>linux学习注意事项</h3><ol>
+<li>Linux严格区分大小写</li>
+<li>linux中所有内容都是以文件的形式保存</li>
+<li>linux不靠扩展名区分文件类型，但是有一些约定，方便管理员识别，不是必须的，linux能够通过颜色来帮助说明</li>
+<li>linux所有的存储设备都必须挂载之后用户才能使用。</li>
+</ol>
+<h3 id="服务器管理和维护建议"><a href="#服务器管理和维护建议" class="headerlink" title="服务器管理和维护建议"></a>服务器管理和维护建议</h3><p>linux各个目录的作用：</p>
+<p>/bin /sbin区别：s表示super，只有root用户才能执行该目录的命令或程序</p>
+<p>/boot：引导linux的重要文件，包括grub和内核文件等</p>
+<p>/dev：所有的设备资源</p>
+<p>/etc：默认系统配置文件</p>
+<p>/home：普通用户的家目录</p>
+<p>/mnt，/media，/misc：用于挂载文件，空目录才能挂载，一般采用/mnt，当然也可以自己随意设置一个挂载点</p>
+<p>/opt：第三方软件可选程序安装目录，通常现在使用/usr/local代替</p>
+<p>/proc和/sys：用于存放系统和内核信息，存放在内存中，随时可能消失</p>
+<p>/root：超级用户的家目录</p>
+<p>/srv：服务数据目录</p>
+<p>/usr：系统资源目录</p>
+<p>/var：动态数据保存目录</p>
+<h3 id="linux常用命令"><a href="#linux常用命令" class="headerlink" title="linux常用命令"></a>linux常用命令</h3><h4 id="文件处理命令"><a href="#文件处理命令" class="headerlink" title="文件处理命令"></a>文件处理命令</h4><h5 id="命令格式与目录处理命令ls"><a href="#命令格式与目录处理命令ls" class="headerlink" title="命令格式与目录处理命令ls"></a>命令格式与目录处理命令ls</h5><p>命令格式：命令 【-选项】 【参数】</p>
+<p>目录处理命令：ls</p>
+<p>详细信息：</p>
+<ol>
+<li>权限信息：-rw-r–r–，一共10个标记，文件类型：（-表示二进制文件，d表示目录，l表示软连接文件）</li>
+<li>硬链接个数，引用计数</li>
+<li>所有者：linux把用户分成三类，所有者（u），用户组（g），其他人（o）</li>
+<li>所属组</li>
+<li>大小</li>
+<li>最后修改时间</li>
+<li>文件名</li>
+</ol>
+<h5 id="目录处理命令：mkdir，cd，pwd，rmdir，cp，mv，rm"><a href="#目录处理命令：mkdir，cd，pwd，rmdir，cp，mv，rm" class="headerlink" title="目录处理命令：mkdir，cd，pwd，rmdir，cp，mv，rm"></a>目录处理命令：mkdir，cd，pwd，rmdir，cp，mv，rm</h5><p><strong>命令名称：mkdir</strong></p>
+<p>创建新目录，可以同时建立多个目录</p>
+<p>-p，递归创建</p>
+<p><strong>命令名称：cd</strong></p>
+<p>功能描述：切换目录</p>
+<p><strong>命令名称：pwd</strong></p>
+<p>功能描述：显示当前目录的绝对路径</p>
+<p><strong>命令名称：rmdir</strong></p>
+<p>功能描述：删除空目录</p>
+<p><strong>命令名称：cp</strong></p>
+<p>功能描述：复制文件或目录，复制时可以直接就修改名字</p>
+<p><strong>命令名称：mv</strong></p>
+<p>功能描述：剪切文件、改名</p>
+<p><strong>命令名称：rm（不要随意删除系统文件，删除时注意，linux没有回收站）</strong></p>
+<p>功能描述：删除文件</p>
+<h5 id="文件处理命令（touch，cat，more，less，head，tail）"><a href="#文件处理命令（touch，cat，more，less，head，tail）" class="headerlink" title="文件处理命令（touch，cat，more，less，head，tail）"></a>文件处理命令（touch，cat，more，less，head，tail）</h5><p>命令名称：touch</p>
+<p>功能描述：创建空文件（可以同时创建多个文件，用空格分开，不建议用特殊符号给文件命名，尤其是空格）</p>
+<p><strong>命令名称：cat</strong></p>
+<p>功能描述：显示文件内容</p>
+<p>​              -n 显示行号</p>
+<p><strong>命令名称：more</strong></p>
+<p>语法：more 【文件名】</p>
+<p>​              空格或者f：进行翻页</p>
+<p>​              回车：换行</p>
+<p>​              Q或q：退出</p>
+<p>功能描述：分页显示文件内容，没法向上翻页</p>
+<p><strong>命令名称：less</strong></p>
+<p>语法：less 【文件名】</p>
+<p>​              Page up/down：进行翻页</p>
+<p>​              上下：换行</p>
+<p>​              Q或q：退出</p>
+<p>​              /内容：可以查找内容，n：下一个</p>
+<p>功能描述：分页显示文件内容，可以向上翻页，可进行搜索</p>
+<p><strong>命令名称：head</strong></p>
+<p>语法：head  -n 行数【文件名】</p>
+<p>功能描述：显示文件内容，只显示前几行</p>
+<p><strong>命令名称：tail</strong></p>
+<p>语法：tail -n 行数【文件名】</p>
+<p>功能描述：显示文件内容，只显示末尾几行</p>
+<h5 id="链接命令（ln）"><a href="#链接命令（ln）" class="headerlink" title="链接命令（ln）"></a>链接命令（ln）</h5><p><strong>命令名称：ln</strong></p>
+<p>语法：ln  -s 【源文件】 【目标文件】</p>
+<p>​              -s 创建软连接</p>
+<p>功能描述：生成链接文件</p>
+<h5 id="权限管理（chmod-chown-chgrp-umask）"><a href="#权限管理（chmod-chown-chgrp-umask）" class="headerlink" title="权限管理（chmod chown chgrp umask）"></a>权限管理（chmod chown chgrp umask）</h5><p><strong>权限管理命令：chmod</strong></p>
+<p>命令英文原意：change the permissions mode of a file</p>
+<p>语法：chmod  【{ugoa}  {+-=}  {rwx}】 【文件或目录】</p>
+<p>​        chmod 【mode=421】 【文件或目录】</p>
+<p>​              -R 递归修改</p>
+<p>功能描述：修改文件或目录权限</p>
+<p><strong>只有两个人可修改：拥有者，或者root</strong></p>
+<p><strong>修改所有者权限管理命令：chown</strong></p>
+<p>语法：chown 【用户】 【文件或目录】</p>
+<p>功能描述：改变文件或目录的所有者</p>
+<p>前提：<strong>root用户才能修改</strong>，用户要先存在</p>
+<p><strong>修改所属组权限管理命令：chgrp</strong></p>
+<p>语法：chgrp【用户组】 【文件或目录】</p>
+<p>功能描述：改变文件或目录的所属组</p>
+<p>前提：root用户才能修改</p>
+<p><strong>缺省权限管理命令：umask</strong></p>
+<p><strong>默认创建的目录权限是rwxr-xr-x，文件比目录都少x，就是rw-r—r–（出于安全考虑）</strong></p>
+<p>0222即用异或（减）的方法表示755</p>
+<h5 id="文件搜索命令（find，locate，which，whereis，grep）"><a href="#文件搜索命令（find，locate，which，whereis，grep）" class="headerlink" title="文件搜索命令（find，locate，which，whereis，grep）"></a>文件搜索命令（find，locate，which，whereis，grep）</h5><p><strong>命令名称：find</strong></p>
+<p><strong>语法：find</strong> <strong>【搜索范围】</strong> <strong>【匹配条件】</strong></p>
+<p>功能描述：文件搜索</p>
+<p><strong>-iname</strong>：表示忽略大小写</p>
+<p>?: 表示一个字符的通配符</p>
+<p>*：表示多个字符的通配符</p>
+<p>-size：制定文件大小，+n表示大于n， -n表示小于n，以数据块为单位，512字节</p>
+<p>-user：根据所有者查找</p>
+<p>-group：根据所属组查找</p>
+<p>-cmin，-amin，-mmin，根据时间属性查找，文件属性被改，文件访问，文件内容被修改，如 find  /etc  –cmin  -5 表示查找5分钟内被修改文件属性的文件和目录</p>
+<p>-a：链接符，同时满足多个条件</p>
+<p>-o：连接符，满足其中一个</p>
+<p><strong>文件搜索命令：locate</strong></p>
+<p>语法：locate 文件名</p>
+<p>功能描述：在<strong>文件资料库</strong>进行文件搜索</p>
+<p>注：locate是在文件资料库查找，对于刚刚更新的文件可能查找不到，可以手动更新文件资料库：updatedb，对于/tmp目录的文件不在文件资料库的保存范围，所以可能搜不到，忽略大小写可以用-i</p>
+<p><strong>文件搜索命令：which（查找的是命令）</strong></p>
+<p>语法：which <strong>命令</strong></p>
+<p>功能描述：搜索命令所在路径以及<strong>别名信息</strong></p>
+<p><strong>文件搜索命令：whereis</strong></p>
+<p>语法：whereis 【命令名称】</p>
+<p>功能描述：搜索命令所在路径以及<strong>帮助文档</strong>坐在路径</p>
+<p><strong>文件搜索命令：grep</strong></p>
+<p>命令名称：grep</p>
+<p>语法：grep  -iv【指定字符串】【文件名】</p>
+<p>功能描述：在文件中搜索字符串匹配的行并输出</p>
+<p>​                     -i 不区分大小写</p>
+<p>​                     -v 排查指定字符串</p>
+<h4 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a>帮助命令</h4><p><strong>命令名称：man</strong></p>
+<p>语法：man 【命令或配置文件】</p>
+<p>功能描述：获取帮助信息，优先查看命令帮助信息</p>
+<h4 id="用户管理命令"><a href="#用户管理命令" class="headerlink" title="用户管理命令"></a>用户管理命令</h4><p><strong>命令名称：useradd</strong></p>
+<p>执行权限：root</p>
+<p>语法：useradd 用户名</p>
+<p>功能描述：添加新用户</p>
+<p><strong>命令名称：passwd</strong></p>
+<p>语法：passwd 用户名</p>
+<p>功能描述：设置用户密码</p>
+<p>root 可以修改所有用户的密码，用户只能修改自己的密码，用户自己修改时密码不能过于简单</p>
+<p><strong>命令名称：who</strong></p>
+<p>语法：who</p>
+<p>功能描述：查案登录用户信息</p>
+<p><strong>命令名称：w</strong></p>
+<p>语法：w</p>
+<p>功能描述：查案登录用户详细信息</p>
+<h4 id="压缩解压命令"><a href="#压缩解压命令" class="headerlink" title="压缩解压命令"></a>压缩解压命令</h4><p>对于.gz结尾的文件：</p>
+<p><strong>命令名称：gzip</strong></p>
+<p>语法：gzip 【文件】</p>
+<p>功能描述：压缩文件</p>
+<p><strong>解压缩：gunzip</strong> <strong>【文件】或者gzip  -d</strong>  【文件】</p>
+<p>注：gzip 只能解压缩文件，不能解压缩<strong>目录</strong>；gzip解压缩<strong>不保留源文件</strong>，这个要注意</p>
+<p>对于<strong>目录文件</strong>，需要打包或者压缩：<strong>tar</strong>命令</p>
+<p><strong>命令名称：tar</strong></p>
+<p>语法：tar  选项【-zcfv】【压缩后的文件名】 【要打包或压缩的目录】</p>
+<p>​                     -c 打包</p>
+<p>​                     -x 解压缩</p>
+<p>​                     -f 指定文件名</p>
+<p>​                     -z打包同时压缩</p>
+<p>功能描述：打包目录</p>
+<p>压缩后文件格式：.tar.gz</p>
+<p><strong>命令名称：zip（.zip文件，window和linux通用的格式），能保留源文件</strong></p>
+<p>语法：zip 选项【-r】 【压缩后的文件名】 【文件或目录】</p>
+<p>​              -r 压缩目录</p>
+<p>功能描述：压缩文件或目录，压缩后文件格式.zip</p>
+<p>解压缩：unzip 【文件名】</p>
+<p>对于bz2：</p>
+<p><strong>命令名称：bzip2</strong></p>
+<p>语法：bzip2  选项【-k】 【要打包或压缩的目录】</p>
+<p>​                     -k 保留源文件</p>
+<p>功能描述：打包目录</p>
+<p>压缩后文件格式：bz2</p>
+<h4 id="网络配置命令"><a href="#网络配置命令" class="headerlink" title="网络配置命令"></a>网络配置命令</h4><p><strong>网络命令名称：write</strong></p>
+<p>语法：write 【用户名】</p>
+<p>功能描述：给用户发信息，以ctrl+D保存结束，前提条件，用户要在线</p>
+<p><strong>网络命令名称：wall</strong></p>
+<p>语法：wall【message】</p>
+<p>功能描述：给所有在线用户发信息，以ctrl+D保存结束，前提条件，用户要在线</p>
+<p><strong>网络命令名称：ping</strong></p>
+<p>语法：ping 【选项】 【IP地址】</p>
+<p>​             -c  指定发送次数</p>
+<p>功能描述：测试网络连通性</p>
+<p><strong>网络命令名称：mail</strong></p>
+<p>语法：mail 【用户名】</p>
+<p>功能描述：发送邮件，不要求用户在线，ctrl+D保存并发送</p>
+<p><strong>网络命令名称：last</strong></p>
+<p>语法：last</p>
+<p>功能描述：列出目前与过去登入系统的用户信息，是比较重要的日志查询命令</p>
+<p><strong>网络命令名称：lastlog</strong></p>
+<p>语法：last</p>
+<p>功能描述：列出目前与过去登入系统的用户最后一次登录信息，是比较重要的日志查询命令</p>
+<p><strong>网络命令名称：traceroute</strong></p>
+<p>语法：traceroute</p>
+<p>功能描述：显示数据包到主机间的路径，可以用来测试网络故障节点在哪里</p>
+<p><strong>网络命令名称：netstat</strong></p>
+<p>指令所在路径：/bin/netstat</p>
+<p>执行权限：所有用户</p>
+<p>语法：netstat 【选项】</p>
+<p>​             -t ：tcp协议</p>
+<p>​             -u：udp协议</p>
+<p>​             -l：监听</p>
+<p>​             -r：路由</p>
+<p>​             -n：显示IP地址和端口号</p>
+<p>功能描述：显示网络相关信息，也是一个非常重要的命令</p>
+<p><strong>网络命令名称：mount</strong></p>
+<p>语法：mount 【-t 文件系统】 【设备文件挂载点】</p>
+<p>功能描述：挂载设备，进行映射</p>
+<h4 id="关机重启命令"><a href="#关机重启命令" class="headerlink" title="关机重启命令"></a>关机重启命令</h4><p>shutdown 命令：shutdown 【选项】 时间</p>
+<p>选项：</p>
+<p>​      -c： 取消前一个关机命令</p>
+<p>​      -h： 关机</p>
+<p>​      -r： 重启</p>
+<p>init 0关机，init 6重启</p>
+<h2 id="vim编辑器"><a href="#vim编辑器" class="headerlink" title="vim编辑器"></a>vim编辑器</h2><p>Vim编辑器简介：vim是一个功能强大的全屏幕文本编辑器，是linux/unix上最常用的文本编辑器，它的作用是建立、编辑和显示文本文件。</p>
+<p>Vim的工作模式有三种：<strong>命令模式，插入模式，编辑模式</strong></p>
+<p>进入命令模式：vi 【文件名】</p>
+<p>在命令模式下输入i或a或o进入插入模式，按esc回到命令模式</p>
+<p>在命令模式下按：冒号进入编辑模式，编辑模式是输入命令如：wq是写入保存退出</p>
+<h2 id="软件包管理"><a href="#软件包管理" class="headerlink" title="软件包管理"></a>软件包管理</h2><h4 id="软件包简介"><a href="#软件包简介" class="headerlink" title="软件包简介"></a>软件包简介</h4><p><strong>软件包分类</strong></p>
+<ul>
+<li><p>源码包：脚本安装包，通常以压缩包tar.gz方式压缩，绝大多数以C语言编写，安装过程容易报错。</p>
+</li>
+<li><p>二进制包（rpm包，系统默认包），<strong>已经经过编译的</strong>，rpm格式相当于window的EXE文件，在redhat上是rpm，在Debian版本上是deb。Rpm包可以在安装光盘中的packages中。</p>
+</li>
+</ul>
+<p><strong>源码包优点：</strong></p>
+<ul>
+<li><p>开源，能看到源代码，可以学习顶级程序员开发的源代码</p>
+</li>
+<li><p>可以自由选择所需要的安装功能</p>
+</li>
+<li><p>软件是先编译安装的，更加适合自己系统，更加稳定和有效率</p>
+</li>
+<li><p>卸载也十分方便</p>
+</li>
+</ul>
+<p><strong>RPM安装</strong></p>
+<p>rpm  -ivh  包全名（需要注意包的路径）</p>
+<p>选项：  -i（install） 安装</p>
+<p>​              -v（verbose） 显示详细信息</p>
+<p>​              -h（hash） 显示进度</p>
+<p>​              –nodeps  不检测依赖性</p>
+<p><strong>RMP升级</strong></p>
+<p>rpm  -Uvh  包全名</p>
+<p><strong>RPM卸载</strong></p>
+<p>rpm  -e  包名（/var/lib/rpm下）</p>
+<p>选项： -e（erase）  卸载</p>
+<p>​             –nodeps   不检测依赖性</p>
+<h4 id="rpm包的查询方法"><a href="#rpm包的查询方法" class="headerlink" title="rpm包的查询方法"></a>rpm包的查询方法</h4><ol>
+<li>查询软件包是否安装：rpm -q 包名</li>
+<li>查询软件包详细信息：<ol>
+<li>rpm -qi 包名 #已安装的软件包</li>
+<li>rpm -qip 包名 #未安装的软件包</li>
+</ol>
+</li>
+<li>查询软件包的安装位置：<ol>
+<li>rpm -ql 包名 #已安装</li>
+<li>rpm -qlp 包名  #未安装</li>
+</ol>
+</li>
+<li>查询系统文件属于哪个软件包：rpm -qf 系统文件名</li>
+<li>查询软件包的依赖性：<ol>
+<li>rpm -qR 包名 #已安装 </li>
+<li>rpm -qRp 包名  #未安装</li>
+</ol>
+</li>
+</ol>
+<h4 id="rpm包的校验和文件提取"><a href="#rpm包的校验和文件提取" class="headerlink" title="rpm包的校验和文件提取"></a>rpm包的校验和文件提取</h4><ol>
+<li><p>包校验：用于检查安装的包修改了哪些文件 rpm -V 已安装的包名</p>
+</li>
+<li><p>rpm包文件提取（用于丢失某个子文件，或者误删除，不能全部重新安装，只需要把文件提取放回去）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm2cpop 包全名 | cpio -idv ./文件绝对路径</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="rpm包管理-yum-在线管理"><a href="#rpm包管理-yum-在线管理" class="headerlink" title="rpm包管理 -yum 在线管理"></a>rpm包管理 -yum 在线管理</h4><p>yum命令：</p>
+<ol>
+<li><p>查询在线所有可用软件包列表：yum list java*</p>
+</li>
+<li><p>搜索服务器上所有和关键字相关的包：yum search 【关键字】</p>
+</li>
+<li><p>安装软件包：yum -y install 【包名】</p>
+</li>
+<li><p>升级软件包：yum -y update 【包名】</p>
+</li>
+<li><p>卸载：yum -y remove 【包名】</p>
+</li>
+<li><p>查询所有可用软件组：yum grouplist</p>
+</li>
+<li><p>安装/删除软件组： yum install/remove 【软件组名】</p>
+<p>软件组名有空格需要双引号，注意安装时输入英文不是中文</p>
+</li>
+</ol>
+<h4 id="源码包安装"><a href="#源码包安装" class="headerlink" title="源码包安装"></a>源码包安装</h4><ol>
+<li><p>与rpm包不同，安装的位置不是不同的，rpm包有默认的安装位置，<strong>而源码包可以安装在指定的位置上，一般建议放在/usr/local/软件名/</strong></p>
+</li>
+<li><p>源码包安装与rpm包安装对服务的管理不同：</p>
+<ol>
+<li>rpm包安装的服务可以使用系统服务管理命令（service）来管理</li>
+<li>通过源码包安装的服务不能被服务管理命令管理，因为没有安装到默认的路径中，只能用绝对路径进行服务的管理（这里的管理指start，restart，stop）。</li>
+</ol>
+</li>
+<li><p>源码包的安装过程</p>
+<ol>
+<li><p>源码包下载</p>
+</li>
+<li><p>在linux服务器中解压源码包</p>
+</li>
+<li><p>进入解压缩包目录，查看<strong>install文件或readme文件</strong>，一般在这2个文件会详细说明安装过程</p>
+</li>
+<li><p>./configure：用于软件的配置和坚持（可以用./configure -help查看支持哪些选项）</p>
+<p>设置安装位置，建议但是不强制–prefix=/usr/local/{安装目录}</p>
+</li>
+<li><p>使用make和make install安装</p>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="用户和用户组管理"><a href="#用户和用户组管理" class="headerlink" title="用户和用户组管理"></a>用户和用户组管理</h2><h3 id="用户配置文件"><a href="#用户配置文件" class="headerlink" title="用户配置文件"></a><strong>用户配置文件</strong></h3><p>用户文件信息 /etc/passwd</p>
+<p>影子文件 /etc/shadow</p>
+<p>用户组信息文件/etc/group</p>
+<p>组密码文件 /etc/gshadow</p>
+<h4 id="etc-passwd"><a href="#etc-passwd" class="headerlink" title="/etc/passwd"></a>/etc/passwd</h4><p><strong>用户名称：密码标志：UID（用户ID）：GID（组ID）：用户说明：家目录：bash</strong></p>
+<p>密码标志：x表示该用户需要密码才能登陆，如果去掉x就不需要密码了。</p>
+<p><strong>UID</strong>：用数字标识用户，用户采用用户名记住用户，系统采用数字，所以root不一定是管理员，UID=0的才是管理员</p>
+<p><strong>GID</strong>：用户初始组ID，这里指的是初始组，linux还有附加组概念，用户可以加入多个附加组，但是只能有一个初始组，最好不要改初始组，用户必须依赖一个初始组才能存在</p>
+<p>家目录位置：对于普通用户来说，默认是/home/用户名/,对于超级用户来说，默认是/root/，但是可以修改，但不建议修改</p>
+<p><strong>登录之后的Shell</strong>：命令解析器，标准shell是/bin/bash，还可以是/sbin/nologin, 不要随便改，不要无法登录系统，改成/sbin/nologin可以暂时禁用某个用户，千万不要改超级用户的。</p>
+<h4 id="etc-shadow配置文件"><a href="#etc-shadow配置文件" class="headerlink" title="/etc/shadow配置文件"></a><strong>/etc/shadow配置文件</strong></h4><p><strong>权限为000，只有超级用户才能查看，默认的配置值在/etc/default/useradd以及/etc/login.defs中</strong></p>
+<p><strong>9个字段</strong>：</p>
+<p><strong>用户名称：如root等</strong></p>
+<p>加密密码（SHA512）：如果是！！或者*表示没有密码，想临时禁用某个用户的密码可以在密码前加！</p>
+<p>密码最后一次修改时间：用时间戳表示，从1970年1月1到现在的天数</p>
+<p><strong>两次密码的修改时间间隔</strong>：与第三个字段相比，如果是0表示上一次修改完密码后立马可以修改，如果是10表示修改密码10天后才能再次修改</p>
+<p><strong>密码的有效期</strong>：99999表示该密码有效期为99999天，要想强制用户隔30天修改一次密码可以把该字段设置为30</p>
+<p><strong>密码到期之前的警告时间</strong>：7表示在密码到期前7天，用户每天登陆都会收到要求改密码的信息</p>
+<p><strong>密码到期之后的宽限天数</strong>：与第五字段比，0或空表示密码过期后立刻失效，用户就没法登陆了，-1表示一直提示要用户改密码，密码永远不会失效</p>
+<p><strong>账号失效时间</strong>：用时间戳表示，到这个天数，该账号就失效了，无论密码是否有效</p>
+<p><strong>第九字段：保留</strong></p>
+<h4 id="组信息文件-etc-group"><a href="#组信息文件-etc-group" class="headerlink" title="组信息文件/etc/group"></a><strong>组信息文件/etc/group</strong></h4><p><strong>字段说明：四个字段</strong></p>
+<p>组名：组的密码标志：组ID（GID）：组中的附加用户（有些用户有附加组）</p>
+<h4 id="组密码文件-etc-gshadow"><a href="#组密码文件-etc-gshadow" class="headerlink" title="组密码文件 /etc/gshadow"></a><strong>组密码文件 /etc/gshadow</strong></h4><p>组名：组密码：组管理员用户名：组中的附加用户</p>
+<h4 id="用户管理的相关文件"><a href="#用户管理的相关文件" class="headerlink" title="用户管理的相关文件"></a><strong>用户管理的相关文件</strong></h4><p><strong>用户的家目录：</strong></p>
+<p>普通用户：/home/用户名/,权限为700</p>
+<p>超级用户：/root/,权限为550</p>
+<h4 id="用户管理命令-1"><a href="#用户管理命令-1" class="headerlink" title="用户管理命令"></a><strong>用户管理命令</strong></h4><p><strong>useradd命令</strong></p>
+<p>useradd 【选项】 用户名</p>
+<p>–u  指定用户的UID</p>
+<p>–d  家目录    手工指定用户的家目录</p>
+<p>–c  用户说明  手工指定用户的说明</p>
+<p>–g  初始组名   手工指定用户的初始组，但是不建议改</p>
+<p>–G  组名       手工指定用户的附加组，可以加入多个已有的组</p>
+<p>–s  shell       手工指定用户登录的shell，默认是/bin/bash</p>
+<p><strong>passwd【选项】用户名</strong></p>
+<p>超级用户可以修改任何用户密码，普通用户只能修改自己密码，而且普通用户修改密码时候不能太简单。</p>
+<p><strong>修改用户信息usermod和修改用户密码状态chage命令（针对已存在用户）</strong></p>
+<p>–u：修改UID；</p>
+<p>-c：修改说明；</p>
+<p>-G：加入附加组；</p>
+<p>-L：锁定用户；</p>
+<p>-U：解锁用户，</p>
+<p>-g：修改初始组（不建议，怕自己搞乱）</p>
+<p><strong>chage【选项】用户名</strong></p>
+<p>–l：列出用户详细密码状态</p>
+<p>–d日期：修改密码最后一次日期</p>
+<p>–m：两次修改密码时间间隔</p>
+<p>–M：密码有效期</p>
+<p>–W：前多少天警告</p>
+<p>–I：宽限多少天</p>
+<p>功能：设置账号的最小修改密码日期</p>
+<p><strong>删除用户命令userdel和切换用户命令su</strong></p>
+<p>userdel  –r 用户名</p>
+<p>-r表示删除用户并同时删除家目录</p>
+<p><strong>su</strong> <strong>切换用户</strong></p>
+<h4 id="用户组管理命令"><a href="#用户组管理命令" class="headerlink" title="用户组管理命令"></a><strong>用户组管理命令</strong></h4><p><strong>添加组： groupadd</strong>  <strong>【选项】</strong> <strong>组名</strong></p>
+<p> -g ：添加组ID</p>
+<p>如groupadd  -g  502  test</p>
+<p><strong>修改组：groupmod</strong>  <strong>【选项】</strong> <strong>组名</strong></p>
+<p>–g GID：    修改组ID</p>
+<p>–n 新组名：    修改组名</p>
+<p>如：groupmod  -n  newtest  test</p>
+<p><strong>删除组：groupdel</strong> <strong>组名；只能删除没有初始用户的组</strong></p>
+<p>把用户添加入组或者从组中删除用户：<strong>gpasswd 【选项】</strong> <strong>组名</strong></p>
+<p>–a 用户名：把用户加入组</p>
+<p>–d 用户名：把用户从组中删除</p>
+<p>范例：gpasswd  -a  tangent  root    把tangent加入root组，也可以直接修改/etc/group的</p>
+<h2 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h2><h3 id="ACL权限管理"><a href="#ACL权限管理" class="headerlink" title="ACL权限管理"></a>ACL权限管理</h3><h4 id="ACL权限"><a href="#ACL权限" class="headerlink" title="ACL权限"></a>ACL权限</h4><p>ACL权限是<strong>针对分区</strong>的，在利用ACL权限时我们需要检查该分区<strong>是否开启ACL功能，默认都开启</strong>，需要文件所在的分区支持ACL权限。</p>
+<p>检查分区是否开启ACL的命令：</p>
+<p><strong>dumpe2fs  -h  /dev/sda5</strong></p>
+<h4 id="查看文件是否有ACL权限"><a href="#查看文件是否有ACL权限" class="headerlink" title="查看文件是否有ACL权限"></a>查看文件是否有ACL权限</h4><ol>
+<li><p>getfacl 【文件名】</p>
+</li>
+<li><p>setfacl 【选项】 文件名</p>
+<p>–m  设定ACL权限</p>
+<p>–x  删除指定用户或用户组ACL权限</p>
+<p>–b  删除所有ACL权限</p>
+<p>–k  设定默认ACL 权限</p>
+<p>–R  递归设定ACL权限</p>
+</li>
+</ol>
+<h4 id="最大有效权限设置"><a href="#最大有效权限设置" class="headerlink" title="最大有效权限设置"></a>最大有效权限设置</h4><p>命令setfacl  -m m:rx  文件名</p>
+<h4 id="删除ACL权限"><a href="#删除ACL权限" class="headerlink" title="删除ACL权限"></a>删除ACL权限</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setfacl  -x  g:group  /tmp/project  #删除用户组的ACL权限</span><br><span class="line"></span><br><span class="line">setfacl  -b /tmp/project/    删除文件所有ACL权限</span><br></pre></td></tr></table></figure>
+<h4 id="默认ACL权限和递归ACL权限"><a href="#默认ACL权限和递归ACL权限" class="headerlink" title="默认ACL权限和递归ACL权限"></a>默认ACL权限和递归ACL权限</h4><p>递归是在父目录在设定ACL权限时，所有的子文件和子目录都遵循相同的ACL权限，命令为<strong>setfacl  -m  u：用户名：权限  -R</strong>  <strong>目录名</strong></p>
+<p>默认ACL权限的作用是如果在父目录设定默认的ACL权限，那么父目录中所有新建的子文件都会继承父目录的ACL权限，<strong>原有已经存在的子文件不继承</strong>。</p>
+<p>新建的file并没有拥有ACL权限，要想新建的文件都拥有默认的ACL权限就可以采用命令setfacl  -m  d:u:wangwu:rx -R  /tmp/project/</p>
+<h3 id="文件特殊权限"><a href="#文件特殊权限" class="headerlink" title="文件特殊权限"></a>文件特殊权限</h3><h4 id="SetUID权限"><a href="#SetUID权限" class="headerlink" title="SetUID权限"></a>SetUID权限</h4><p>setUID的方法</p>
+<p>​      chmod 4755 命令</p>
+<p>​      chmod u+s 命令</p>
+<p>setUID功能：只有可执行的二进制文件才能设定SUID权限</p>
+<p>命令执行者需要对该文件拥有x（执行）权限：</p>
+<p>可以理解为执行过程中，命令执行者拥有该文件程序的所有者身份，举例来说某个执行文件的所有者是root，如果wangwu执行时，变身为root，执行完该文件，变回来wangwu身份，但是前提是该文件要有SUID权限，类似于windows的以管理员身份运行</p>
+<h4 id="SGID权限"><a href="#SGID权限" class="headerlink" title="SGID权限"></a>SGID权限</h4><p>SGID权限的解析和SUID很像，都是针对可执行的二进制程序，命令执行者也需拥有x权限，但是身份不是变成超级用户，而是执行者所属组临时变成该文件的所属组，只在执行过程中有效</p>
+<p>取消删除SGID权限 chmod  g-s 【文件】或者 chmod 755 【文件】</p>
+<p>添加SGID chmod g+s 或 chmod 2755 </p>
+<h4 id="Sticky-BIT权限"><a href="#Sticky-BIT权限" class="headerlink" title="Sticky BIT权限"></a>Sticky BIT权限</h4><p>SBIT权限只对<strong>目录有效</strong></p>
+<p>普通用户对该目录有w权限和x权限</p>
+<p>具有SBIT权限的目录，普通用户只能删除自己建立的文件，但是不能删除其他用户建立的文件。超级用户不受该限制</p>
+<p>设置粘着位  chmod  1777  /tmp/ 或chmod  o+t  /tmp/</p>
+<p>删除粘着位 chmod  777  /tmp/ 或 chmod  o-t  /tmp/</p>
+<h4 id="文件系统chattr权限"><a href="#文件系统chattr权限" class="headerlink" title="文件系统chattr权限"></a>文件系统chattr权限</h4><p>命令格式 chattr 【+-=】 【选项】 【文件或目录名】，如 chattr +i newfile</p>
+<p>​        +：增加权限</p>
+<p>​        -：删除权限</p>
+<p>​        =：等于某个权限</p>
+<p>选项</p>
+<p>i：对文件设置i属性，不允许对该文件进行删除、改名，也不能添加和修改数据；相当于把文件锁起来，<strong>只能看文件内容</strong>。</p>
+<p>​    如果对<strong>目录</strong>设置i属性，那么只能修改该目录下的文件数据，<strong>不能删除和新建</strong>文件；对root用户也生效，防止误操作</p>
+<p>a：如果对文件设置a属性，那么<strong>只能在文件中增加数据</strong>，不能删除和修改数据；</p>
+<p>​    如果对目录设置a属性，那么只允许在目录中<strong>建立和修改</strong>文件(修改文件的内容而不是改名)，但不允许删除</p>
+<p><strong>查看文件系统属性</strong></p>
+<p>lsattr  【选项】 文件名</p>
+<p>–a：显示所有文件和目录</p>
+<p>–d：若目标是目录，仅列出目录本身的属性，而不是子文件的</p>
+<h4 id="sudo权限"><a href="#sudo权限" class="headerlink" title="sudo权限"></a>sudo权限</h4><p>root把本来只属于超级用户执行的命令赋予普通用户执行</p>
+<p>sudo的操作对象是<strong>系统命令</strong></p>
+<p>sudo使用方式</p>
+<p>vi sudo命令  实际上修改的是/etc/sudoers文件，如下</p>
+<p>root   ALL=（ALL）  ALL</p>
+<p>语法</p>
+<p><strong>用户名</strong>   <strong>被管理主机的地址</strong>=（可使用的身份）   授权命令（绝对路径）</p>
+<p>注：被管理主机地址是本机的IP地址，而不是远程登录终端的IP地址，ALL表示本机，有时候还需要填IP/网段，这种场景用于集群服务器。</p>
+<h2 id="文件系统管理"><a href="#文件系统管理" class="headerlink" title="文件系统管理"></a>文件系统管理</h2><h3 id="分区和文件系统"><a href="#分区和文件系统" class="headerlink" title="分区和文件系统"></a>分区和文件系统</h3><p>什么是分区？</p>
+<p>通俗地将就是把大硬盘分成几个小硬盘，就好像把一个衣柜分成不同的部分，放不同的衣服</p>
+<p>主分区：最多只有分四个</p>
+<p>扩展分区：只能有一个，也算在主分区的一种，也就是说主分区加扩展分区最多有四个，但是扩展分区不能存数据和格式化，必须再划分成逻辑分区才能使用</p>
+<p>逻辑分区：逻辑分区是在扩展分区中划分得来的</p>
+<h3 id="文件系统常用命令"><a href="#文件系统常用命令" class="headerlink" title="文件系统常用命令"></a>文件系统常用命令</h3><p><strong>文件系统查看命令df（最常用 df  -h）</strong></p>
+<p>df  【选项】 【挂载点】</p>
+<p>​    –a  显示所有的文件系统信息</p>
+<p>​    –h  使用习惯单位显示容量</p>
+<pre><code>-T  显示文件系统类型
+
+-m  以MB为单位显示容量
+
+ -k  以KB为单位显示容量
+</code></pre><p><strong>du命令：统计目录或文件大小（主要统计目录总大小）</strong></p>
+<p>du  -sh  /etc/</p>
+<p><strong>显示磁盘状态命令  dumpe2fs</strong></p>
+<p><strong>挂载命令</strong></p>
+<p>mount  -l   显示已经挂载的设备</p>
+<p>mount  -a   已经配置文件/etc/fstab的内容，自动挂载</p>
+<p>mount 【-t 文件系统】 【-L 卷标名】 【-o 特殊选项】 设备文件名 挂载点</p>
+<p>​    -t 文件系统： 可以为ext4（linux分区）、iso9660（光盘）等文件系统</p>
+<p>​    -L卷标名： 挂载指定卷标分区，不是安装设备名挂载</p>
+<p>​    -o 特殊选项：可以指定挂载的额外选项</p>
+<p><strong>卸载命令</strong></p>
+<p>umount  /dev/sr0   #但是不能在cdrom文件夹里执行</p>
+<h2 id="Shell编程"><a href="#Shell编程" class="headerlink" title="Shell编程"></a>Shell编程</h2><h3 id="Shell是什么"><a href="#Shell是什么" class="headerlink" title="Shell是什么"></a>Shell是什么</h3><p>shell是一个命令行解析器，为用户提供一个向linux内核发送请求以便运行程序的界面系统级程序，用户可以用shell来启动、挂起、停止甚至是编写一些程序，shell可以直接调用linux的系统命令。</p>
+<p>Linux支持的Shell类型，在/etc/shells文件中。</p>
+<h3 id="shell脚本执行的方式"><a href="#shell脚本执行的方式" class="headerlink" title="shell脚本执行的方式"></a>shell脚本执行的方式</h3><h3 id="echo-输出命令"><a href="#echo-输出命令" class="headerlink" title="echo 输出命令"></a>echo 输出命令</h3><p>echo 【选项】 【输出内容】</p>
+<p>选项： -e   支持反斜线控制的转义字符</p>
+<p>编写helloworld.sh</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#! /bin/bash</span><br><span class="line">echo -e &quot;hello world!&quot;</span><br></pre></td></tr></table></figure>
+<p>注：第一句不是注释 所有shell脚本开头都需要注明采用什么样的shell来运行，就是#!/bin/bash，这里我们用标准shell运行</p>
+<p>脚本的运行：</p>
+<ul>
+<li>l赋予执行权限，直接运行</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> chmod 755 helloworld.sh</span><br><span class="line"></span><br><span class="line">./helloworld.sh</span><br></pre></td></tr></table></figure>
+<ul>
+<li>通过Bash来调用执行脚本，这个不需要执行权限</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash helloworld.sh</span><br></pre></td></tr></table></figure>
+<p><strong>注</strong>：单引号和双引号的区别，单引号里所有特殊字符都不解析，原样输出！</p>
+<p><strong>注</strong>：linux的shell中，回车符用$表示，与window不同</p>
+<h3 id="历史命令保存（每个登录用户各自保存）"><a href="#历史命令保存（每个登录用户各自保存）" class="headerlink" title="历史命令保存（每个登录用户各自保存）"></a>历史命令保存（每个登录用户各自保存）</h3><p>history 【选项】 【历史命令保存文件】</p>
+<p>选项： -c 清空历史命令； -w 把缓存中的历史命令写入历史命令保存文件当中，默认保存在家目录下的.bash_history文件中，即~/.bash_history</p>
+<p>默认最大保存1000/etc/profile</p>
+<h3 id="常用别名和快捷键"><a href="#常用别名和快捷键" class="headerlink" title="常用别名和快捷键"></a>常用别名和快捷键</h3><p>设定命令别名</p>
+<p>alias 别名=‘原命令’ 如，alias  vi=‘vim’</p>
+<p>查看命令别名：alias</p>
+<h4 id="命令执行顺序"><a href="#命令执行顺序" class="headerlink" title="命令执行顺序"></a><strong>命令执行顺序</strong></h4><p>第一顺位执行绝对路径或者相对路径执行的命令</p>
+<p>第二顺位执行别名</p>
+<p>第三顺位执行Bash内部命令</p>
+<p>第四顺位执行按照$PATH环境变量定义的目录查找顺序找到的第一个命令</p>
+<h4 id="Bash常用快捷键"><a href="#Bash常用快捷键" class="headerlink" title="Bash常用快捷键"></a>Bash常用快捷键</h4><p>ctrl+C  强制终止当前命令</p>
+<p>ctrl+L 清屏，相当于clear</p>
+<p>ctrl+U 删除或剪切光标之前的命令</p>
+<p>ctrl+K 删除或剪切光标之后的命令</p>
+<p>ctrl+Y  粘贴ctrl+u或者ctrl+K剪切的内容</p>
+<p>crtl+R  在历史命令中搜索，输入搜索内容就会从历史命令中国搜索</p>
+<p>ctrl+D   退出当前终端</p>
+<h3 id="Bash的输入输出重定向"><a href="#Bash的输入输出重定向" class="headerlink" title="Bash的输入输出重定向"></a>Bash的输入输出重定向</h3><p><img src="https://img-blog.csdnimg.cn/20190705094620386.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NDQ4NTc0,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190705094632582.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NDQ4NTc0,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2019070509464682.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NDQ4NTc0,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>输入重定向</strong></p>
+<p>wc  【选项】 【文件名】</p>
+<p>选项：</p>
+<p>–c 统计字节数</p>
+<p>–w 统计单词数</p>
+<p>–l   统计行数</p>
+<h3 id="多命令和管道符"><a href="#多命令和管道符" class="headerlink" title="多命令和管道符"></a>多命令和管道符</h3><p><strong>多命令执行符”;”</strong> </p>
+<p>格式 ：<strong>命令1 ; 命令2</strong></p>
+<p>作用：多个命令顺序执行，没有任何联系</p>
+<p><strong>多命令执行符”&amp;&amp;”</strong> </p>
+<p>格式： <strong>命令1&amp;&amp;命令2</strong></p>
+<p>作用：逻辑与，命令1正确执行，命令2才执行。</p>
+<p><strong>多命令执行符”||”</strong> </p>
+<p>格式： <strong>命令1 || 命令2</strong></p>
+<p>作用：逻辑或，命令1不正确执行，命令2才执行。</p>
+<p><strong>管道符|</strong></p>
+<p>作用：使管道上一个指令的输出作为下一个指令的输入</p>
+<p>使用管道注意的要点</p>
+<ul>
+<li>只处理前一个命令的正确输出，如前一个命令错误，则不再处理</li>
+<li>右边的指令必须能接收标准输入流，否则传递过程中数据会被抛弃</li>
+<li>常用接收输入流的指令有sed, awk, grep, cut, head, top, less, more, wc, join, sort, split</li>
+</ul>
+<p>[外链图片转存失败(img-87elJUoc-1562290954516)(C:\Users\xin\AppData\Roaming\Typora\typora-user-images\1562164137046.png)]</p>
+<h3 id="Bash变量"><a href="#Bash变量" class="headerlink" title="Bash变量"></a>Bash变量</h3><p>什么是变量？ 变量是计算机内存的单元，其中存放的值是可改变的。</p>
+<h4 id="用户自定义变量"><a href="#用户自定义变量" class="headerlink" title="用户自定义变量"></a><strong>用户自定义变量</strong></h4><p>命令规则：</p>
+<ul>
+<li><p>跟c一样，字母数字下划线，不能以数字开头</p>
+</li>
+<li><p>默认字符类型都是字符串类型，如果需要数值运算，必须指定变量类型为数值型</p>
+</li>
+<li><p>等号两边不能有空格</p>
+</li>
+<li><p>变量值如果包含空格，需要用单引号或者双引号包括</p>
+</li>
+<li><p>可以采用\转义字符</p>
+</li>
+<li><p>$变量名</p>
+</li>
+<li><p>可以把命令的结果作为变量值赋予给变量，需要$()包括命令</p>
+</li>
+<li><p>环境变量建议大写，</p>
+</li>
+</ul>
+<p>变量定义：a=123</p>
+<p>变量叠加：a=”$a”123;echo $a</p>
+<h4 id="环境变量：保存和系统操作环境相关的数据"><a href="#环境变量：保存和系统操作环境相关的数据" class="headerlink" title="环境变量：保存和系统操作环境相关的数据"></a><strong>环境变量：保存和系统操作环境相关的数据</strong></h4><p>设置环境变量：<strong>export</strong> 变量名=变量值，加个export就是环境变量</p>
+<p>查看环境变量env；删除环境变量 unset</p>
+<h4 id="位置参数变量"><a href="#位置参数变量" class="headerlink" title="位置参数变量"></a><strong>位置参数变量</strong></h4><p>想脚本当中传递参数或数据的，变量名不能自定义，变量作用是固定的<br><img src="https://img-blog.csdnimg.cn/20190705094717834.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NDQ4NTc0,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h4 id="预定义变量"><a href="#预定义变量" class="headerlink" title="预定义变量"></a><strong>预定义变量</strong></h4><p>Bash已经定义好的变量，变量名不能自定义，变量作用也固定</p>
+<p>$?: 最后一次执行的命令的返回状态。如果上一个命令正确执行，则返回0，反正为非0。</p>
+<p>$$:返回当前进程的进程号（PID）</p>
+<p>$!:后台回血的最后一个进程的进程号</p>
+<h4 id="read命令"><a href="#read命令" class="headerlink" title="read命令"></a>read命令</h4><p>read [选项] [变量名]</p>
+<p>选项：</p>
+<p>​    -p “提示信息”： 在等待read输入时，输出提示信息</p>
+<p>​    -t 秒数：read命令等待的时间，如果不指定，则一直等待</p>
+<p>​    -n 字符数：read命令只接受指定的字符数，之后就会继续执行</p>
+<p>​    -s：隐藏输入的数据，适合机密信息的输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#! /bin/bash</span><br><span class="line">read -t 30 -p &quot;please input your name:&quot; name</span><br><span class="line">echo &quot;$name&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="数值运算和运算符"><a href="#数值运算和运算符" class="headerlink" title="数值运算和运算符"></a>数值运算和运算符</h3><p>shell里面所有变量默认都是字符串类型</p>
+<h4 id="declare命令"><a href="#declare命令" class="headerlink" title="declare命令"></a><strong>declare</strong>命令</h4><p>declare 【+/-】【选项】变量名</p>
+<p>​    +：取消变量的类型属性</p>
+<p>​    -：给变量设定类型属性</p>
+<p>​    -i：将变量声明为整数型</p>
+<p>​    -x：将变量声明为环境变量</p>
+<p>​    -p：显示指定变量的类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# a1=11</span><br><span class="line">[root@localhost test]# declare -p a1</span><br><span class="line">declare -- a1=&quot;11&quot;</span><br><span class="line">[root@localhost test]# a2=22</span><br><span class="line">[root@localhost test]# declare -p a2</span><br><span class="line">declare -- a2=&quot;22&quot;</span><br><span class="line">[root@localhost test]# declare -i a3=$a1+$a2</span><br><span class="line">[root@localhost test]# echo $a3</span><br><span class="line">33</span><br></pre></td></tr></table></figure>
+<h4 id="采用expr或者let运算工具"><a href="#采用expr或者let运算工具" class="headerlink" title="采用expr或者let运算工具"></a>采用expr或者let运算工具</h4><p>expr：$a1 + $a2的空格不能省略</p>
+<p>let：$a1+$a2加号左右不能有空格</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# a4=$(expr $a1 + $a2)</span><br><span class="line">[root@localhost test]# echo $a4</span><br><span class="line">33</span><br><span class="line">[root@localhost test]# a4=$(expr $a1+$a2)</span><br><span class="line">[root@localhost test]# echo $a4</span><br><span class="line">11+22</span><br><span class="line">[root@localhost test]# let a4=$a1+$a2</span><br><span class="line">[root@localhost test]# echo $a4</span><br><span class="line">33</span><br><span class="line">采用$((运算式))或者$[运算式]</span><br></pre></td></tr></table></figure>
+<h4 id="采用-运算式-或者-运算式"><a href="#采用-运算式-或者-运算式" class="headerlink" title="采用$((运算式))或者$[运算式]"></a>采用$((运算式))或者$[运算式]</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# a5=$(($a1+$a2))</span><br><span class="line">[root@localhost test]# echo $a5</span><br><span class="line">33</span><br><span class="line">[root@localhost test]# a6=$[$a1+$a2]</span><br><span class="line">[root@localhost test]# echo $a6</span><br><span class="line">33</span><br></pre></td></tr></table></figure>
+<h3 id="变量测试与内容替换"><a href="#变量测试与内容替换" class="headerlink" title="变量测试与内容替换"></a>变量测试与内容替换</h3><p><img src="https://img-blog.csdnimg.cn/2019070509474218.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NDQ4NTc0,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h4 id="环境变量配置文件"><a href="#环境变量配置文件" class="headerlink" title="环境变量配置文件"></a>环境变量配置文件</h4><ol>
+<li><p>source命令</p>
+<ol>
+<li>source配置文件</li>
+<li>作用：让配置文件在修改完以后直接生效，不需要退出shell或者重启系统</li>
+</ol>
+</li>
+<li><p>环境变量配置文件</p>
+<ol>
+<li>主要定义对系统的操作环境生效的系统默认环境变量，比如PATH、HISTSIZE、PS1、HOSTNAME等</li>
+<li>用set命令查看环境变量有哪些、</li>
+</ol>
+</li>
+<li><p>系统主要的环境变量配置文件</p>
+<ol>
+<li>/etc/profile</li>
+<li>/etc/prfile.d/*.sh</li>
+<li>/etc/bashrc</li>
+<li>~/.bash_profile</li>
+<li>~/.bashrc</li>
+</ol>
+<p>前三个对所有用户生效，后两个只对当前用户生效，而且是隐藏文件，但是具有优先级</p>
+</li>
+</ol>
+<h3 id="字符提取命令"><a href="#字符提取命令" class="headerlink" title="字符提取命令"></a>字符提取命令</h3><ol>
+<li><p>gerp 命令</p>
+</li>
+<li><p>cut 命令 （提取列）命令格式：</p>
+<p>cut 【选项】文件名</p>
+<p>选项：</p>
+<p>​    -f 列号：提取第几列</p>
+<p>​    -d 分隔符：按照指定分隔符分隔列</p>
+</li>
+<li><p>printf 命令（格式化输出）</p>
+<ol>
+<li>常用语awk命令</li>
+<li>命令格式：printf  ‘输出类型输出格式’ 输出内容</li>
+<li>输出类型：<ol>
+<li>%ns：输出字符串，n是数字，代表输出几个字符</li>
+<li>%ni：输出整数，n是数字，代表输出几个数字</li>
+<li>%m.nf：输出浮点数，m和n都是数字，如%8.2f代表共输出8位数，其中2位小数。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>awk命令（提取符合条件的列）</p>
+<ol>
+<li>cut命令有局限，不能区分分隔符是空格的情况</li>
+<li>awk命令格式<ol>
+<li>awk ‘条件1{动作1}条件2{动作2}…’ 文件名</li>
+<li>条件（pattern）：<ol>
+<li>关系表达式条件，如x&gt;10,x&gt;=10等</li>
+</ol>
+</li>
+<li>动作：<ol>
+<li>格式化输出</li>
+<li>流程控制语句</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>begin条件，在运行awk前进行初始化操作</li>
+<li>FS命令指定分隔符（awk默认识别的分隔符是制表符和空格）</li>
+<li>end条件，在执行所有条件之后，再执行end条件，与begin相似</li>
+</ol>
+</li>
+<li><p>sed命令</p>
+<p>a) sed是一种轻量级流编辑器。sed主要用于对文本数据进行选取、替换、删除、新增等操作</p>
+<p>b) sed 【选项】 ‘【动作】’ 文件名</p>
+<p>​    –n：一般sed命令会将所有数据输出到屏幕，如果加入该选项，则只会把经过sed命令处理的行输出到屏幕</p>
+<p>​    –e：允许对输入数据应用多条sed动作，动作之间用；隔开</p>
+<p>​    –i：用sed的修改结果直接修改读取数据的文件，而不是由屏幕输出</p>
+<p>c) 动作</p>
+<p>​     a\ ：追加，在当前行后添加一行或多行，添加多行时，除最后一行外，每行末尾需要用“\”代表数据未完结</p>
+<p>​    c\ ：行替换，用c后面的字符串替换原数据行，替换多行时，除最后一行外，每行末尾需用“\”代表数据未完结</p>
+<p>​     i\ ：插入，在当期行前插入一行或多行，插入多行时，除了最后一行外，每行末尾需要用“\” 代表数据未完结</p>
+<p>​    d：删除指定的行</p>
+<p>​    p：打印，输出指定的行</p>
+<p>​    s：字符串替换，用一个字符串替换另外一个字符串。格式为“行范围s/旧字符串/新字符串/g”（和vim中替换格式类似）</p>
+</li>
+</ol>
+<h3 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a><strong>条件判断</strong></h3><ol>
+<li>按照文件类型进行判断<ol>
+<li>-b：判断该文件是否存在，并且是否为块设备文件，是则为真</li>
+<li>-c：判断该文件是否存在，并且是否为字符设备文件</li>
+<li>-d：判断该文件是否存在，并且是否为目录文件</li>
+<li>-e：判断文件是否存在</li>
+<li>-f：判断该文件是否存在，并且是否为普通文件</li>
+<li>-L：判断该文件是否存在，并且是否为符号链接文件</li>
+<li>-p：判断该文件是否存在，并且是否为管道文件</li>
+<li>-s：判断该文件是否存在，并且是否为非空</li>
+<li>-S：判断该文件是否存在，并且是否为套接字文件</li>
+</ol>
+</li>
+<li>按照文件权限去判断<ol>
+<li>-r：判断该文件是否存在，并且是否该文件拥有读权限</li>
+<li>-w：判断是否存在并且是否该文件拥有写权限</li>
+<li>-x：判断是否存在并且是否该文件拥有执行权限</li>
+<li>-u：判断是否存在并且是否该文件拥有SUID权限</li>
+<li>-g：判断是否存在并且是否该文件拥有SGID权限</li>
+<li>-k：判断是否存在并且是否该文件拥有SBit权限</li>
+</ol>
+</li>
+<li>两个文件之间的判断<ol>
+<li>文件1 -nt 文件2 ：判断文件1的修改时间是否比文件2新（如果新则为真）</li>
+<li>文件1 -ot 文件2：判断修改时间是否比文件2旧</li>
+<li>文件1 -ef 文件2：判断2个文件是否为同一个文件（判断硬链接）</li>
+</ol>
+</li>
+<li>两个数之间的判断<ol>
+<li>数1 -eq 数2：是否相等</li>
+<li>数1 -ne 数2：是否不相等</li>
+<li>-gt：数1是否大于数2</li>
+<li>-lt：数1是否小于数2</li>
+<li>-ge：是否大于等于数2</li>
+<li>-le：是否小于等于数2</li>
+</ol>
+</li>
+<li>字符串之间的判断<ol>
+<li>-z 字符串：判断字符串是否为空（为空则为真）</li>
+<li>-n 字符串：判断字符串是否为非空</li>
+<li>== 字符串：判断2字符串是否相等</li>
+<li>!= 字符串：判断2字符串是否不相等</li>
+</ol>
+</li>
+<li>多重判断<ol>
+<li>判断1 -a 判断2：逻辑与</li>
+<li>-o：逻辑或</li>
+<li>！：逻辑非</li>
+</ol>
+</li>
+</ol>
+<h3 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a><strong>流程控制</strong></h3><ol>
+<li><p>if语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">#统计根分区硬盘使用情况</span><br><span class="line">rate=$(df -h |grep &quot;/$&quot; |awk &#123;&apos;print $5&apos;&#125; |cut -d &quot;%&quot; -f 1)</span><br><span class="line">if [ $rate -ge 10 ]</span><br><span class="line">	then</span><br><span class="line">		echo &quot;Warning! / is full!!&quot;</span><br><span class="line">	else</span><br><span class="line">		echo &quot;/ is OK!&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>注：空格有严格要求。</p>
+</li>
+<li><p>case语句</p>
+</li>
+<li><p>for语句<br>语法一：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">#批量解压/tmp目录下的文件</span><br><span class="line">cd /tmp</span><br><span class="line"></span><br><span class="line">if [-f ls.log]</span><br><span class="line">	then</span><br><span class="line">		rm -rf /tmp/ls.log</span><br><span class="line">fi</span><br><span class="line">touch ls.log</span><br><span class="line">ls *.tar.gz &gt; ls.log</span><br><span class="line">for i in $(cat ls.log)</span><br><span class="line">	do</span><br><span class="line">		tar -zxvf $i $&gt; /dev/null</span><br><span class="line">	done</span><br><span class="line">rm -rf /tmp/ls.log</span><br></pre></td></tr></table></figure>
+<p>语法二：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">sum=0</span><br><span class="line">for((i=1;i&lt;=100;i++))</span><br><span class="line">	do</span><br><span class="line">		sum=$(($sum+$i))</span><br><span class="line">	done</span><br><span class="line">echo $sum</span><br></pre></td></tr></table></figure>
+<p>例子：批量添加用户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">read -p &quot;Please input user name:&quot; -t 30 name</span><br><span class="line">read -p &quot;Please input number of user:&quot; -t 30 num</span><br><span class="line">read -p &quot;Please input passwd of user:&quot; -t 30 password</span><br><span class="line">if [ -n &quot;$name&quot; -a -n &quot;$num&quot; -a -n &quot;$password&quot; ]</span><br><span class="line">	then</span><br><span class="line">	y=$(echo $num |sed &apos;s/^[0-9]*$//g&apos;)</span><br><span class="line">	#判断num输入的是否为纯数字</span><br><span class="line">	if [ -z &quot;$y&quot; ]</span><br><span class="line">		then</span><br><span class="line">		for((i=1;i&lt;=num;i++))</span><br><span class="line">        	do                                       				/usr/sbin/useradd $name$i &amp;&gt; /dev/null</span><br><span class="line">				echo $passwd |/usr/bin/passwd --stdin $name$i $&gt; /dev/null</span><br><span class="line">			done</span><br><span class="line">	fi</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="4">
+<li><p>while语句</p>
+<p>例子：用while实现批量创建用户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">#用while循环实现批量添加用户</span><br><span class="line">#!/bin/bash</span><br><span class="line">read -p &quot;Please input user name:&quot; -t 30 name</span><br><span class="line">read -p &quot;Please input number of user:&quot; -t 30 num</span><br><span class="line">read -p &quot;Please input passwd of user:&quot; -t 30 password</span><br><span class="line">if [ -n $name -a -n $num -a -n $password ]</span><br><span class="line">	then</span><br><span class="line">	y=$(echo $num |sed &apos;s/^[0-9]*$//g&apos;)</span><br><span class="line">	if [ -z $y ]</span><br><span class="line">		then</span><br><span class="line">		i=1</span><br><span class="line">		#不能直接使用&lt;=</span><br><span class="line">		while [ $i -le $num ]</span><br><span class="line">			do</span><br><span class="line">				/usr/sbin/useradd $name$i $&gt; /dev/null</span><br><span class="line">				echo $passwd |/usr/bin/passwd --stdin $name$i &amp;&gt; /dev/null</span><br><span class="line">				i=$(($i+1))</span><br><span class="line">            done</span><br><span class="line">    fi</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+	<div>
+		  
+			
+		  
+	</div>
+    
+
+    
+
+    
+	<div>
+	  
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+	  
+	</div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/24/数据挖掘学习笔记-期末/" rel="next" title="数据挖掘学习笔记">
+                <i class="fa fa-chevron-left"></i> 数据挖掘学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/07/leetcode313. 超级丑数/" rel="prev" title="leetcode313. 超级丑数">
+                leetcode313. 超级丑数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="白哥">
+            
+              <p class="site-author-name" itemprop="name">白哥</p>
+              <p class="site-description motion-element" itemprop="description">怀远不让我打代码</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">129</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hexo.io/zh-cn/" title="本站使用hexo搭建" target="_blank">本站使用hexo搭建</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux简介"><span class="nav-number">1.</span> <span class="nav-text">Linux简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux系统安装"><span class="nav-number">2.</span> <span class="nav-text">Linux系统安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux学习"><span class="nav-number">3.</span> <span class="nav-text">Linux学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#linux学习注意事项"><span class="nav-number">3.1.</span> <span class="nav-text">linux学习注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务器管理和维护建议"><span class="nav-number">3.2.</span> <span class="nav-text">服务器管理和维护建议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux常用命令"><span class="nav-number">3.3.</span> <span class="nav-text">linux常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文件处理命令"><span class="nav-number">3.3.1.</span> <span class="nav-text">文件处理命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#命令格式与目录处理命令ls"><span class="nav-number">3.3.1.1.</span> <span class="nav-text">命令格式与目录处理命令ls</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#目录处理命令：mkdir，cd，pwd，rmdir，cp，mv，rm"><span class="nav-number">3.3.1.2.</span> <span class="nav-text">目录处理命令：mkdir，cd，pwd，rmdir，cp，mv，rm</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#文件处理命令（touch，cat，more，less，head，tail）"><span class="nav-number">3.3.1.3.</span> <span class="nav-text">文件处理命令（touch，cat，more，less，head，tail）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#链接命令（ln）"><span class="nav-number">3.3.1.4.</span> <span class="nav-text">链接命令（ln）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#权限管理（chmod-chown-chgrp-umask）"><span class="nav-number">3.3.1.5.</span> <span class="nav-text">权限管理（chmod chown chgrp umask）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#文件搜索命令（find，locate，which，whereis，grep）"><span class="nav-number">3.3.1.6.</span> <span class="nav-text">文件搜索命令（find，locate，which，whereis，grep）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#帮助命令"><span class="nav-number">3.3.2.</span> <span class="nav-text">帮助命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用户管理命令"><span class="nav-number">3.3.3.</span> <span class="nav-text">用户管理命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#压缩解压命令"><span class="nav-number">3.3.4.</span> <span class="nav-text">压缩解压命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网络配置命令"><span class="nav-number">3.3.5.</span> <span class="nav-text">网络配置命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关机重启命令"><span class="nav-number">3.3.6.</span> <span class="nav-text">关机重启命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vim编辑器"><span class="nav-number">4.</span> <span class="nav-text">vim编辑器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软件包管理"><span class="nav-number">5.</span> <span class="nav-text">软件包管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#软件包简介"><span class="nav-number">5.0.1.</span> <span class="nav-text">软件包简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rpm包的查询方法"><span class="nav-number">5.0.2.</span> <span class="nav-text">rpm包的查询方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rpm包的校验和文件提取"><span class="nav-number">5.0.3.</span> <span class="nav-text">rpm包的校验和文件提取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rpm包管理-yum-在线管理"><span class="nav-number">5.0.4.</span> <span class="nav-text">rpm包管理 -yum 在线管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#源码包安装"><span class="nav-number">5.0.5.</span> <span class="nav-text">源码包安装</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#用户和用户组管理"><span class="nav-number">6.</span> <span class="nav-text">用户和用户组管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用户配置文件"><span class="nav-number">6.1.</span> <span class="nav-text">用户配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#etc-passwd"><span class="nav-number">6.1.1.</span> <span class="nav-text">/etc/passwd</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#etc-shadow配置文件"><span class="nav-number">6.1.2.</span> <span class="nav-text">/etc/shadow配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#组信息文件-etc-group"><span class="nav-number">6.1.3.</span> <span class="nav-text">组信息文件/etc/group</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#组密码文件-etc-gshadow"><span class="nav-number">6.1.4.</span> <span class="nav-text">组密码文件 /etc/gshadow</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用户管理的相关文件"><span class="nav-number">6.1.5.</span> <span class="nav-text">用户管理的相关文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用户管理命令-1"><span class="nav-number">6.1.6.</span> <span class="nav-text">用户管理命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用户组管理命令"><span class="nav-number">6.1.7.</span> <span class="nav-text">用户组管理命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权限管理"><span class="nav-number">7.</span> <span class="nav-text">权限管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ACL权限管理"><span class="nav-number">7.1.</span> <span class="nav-text">ACL权限管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ACL权限"><span class="nav-number">7.1.1.</span> <span class="nav-text">ACL权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看文件是否有ACL权限"><span class="nav-number">7.1.2.</span> <span class="nav-text">查看文件是否有ACL权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最大有效权限设置"><span class="nav-number">7.1.3.</span> <span class="nav-text">最大有效权限设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除ACL权限"><span class="nav-number">7.1.4.</span> <span class="nav-text">删除ACL权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#默认ACL权限和递归ACL权限"><span class="nav-number">7.1.5.</span> <span class="nav-text">默认ACL权限和递归ACL权限</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件特殊权限"><span class="nav-number">7.2.</span> <span class="nav-text">文件特殊权限</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SetUID权限"><span class="nav-number">7.2.1.</span> <span class="nav-text">SetUID权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SGID权限"><span class="nav-number">7.2.2.</span> <span class="nav-text">SGID权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Sticky-BIT权限"><span class="nav-number">7.2.3.</span> <span class="nav-text">Sticky BIT权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件系统chattr权限"><span class="nav-number">7.2.4.</span> <span class="nav-text">文件系统chattr权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sudo权限"><span class="nav-number">7.2.5.</span> <span class="nav-text">sudo权限</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件系统管理"><span class="nav-number">8.</span> <span class="nav-text">文件系统管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分区和文件系统"><span class="nav-number">8.1.</span> <span class="nav-text">分区和文件系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件系统常用命令"><span class="nav-number">8.2.</span> <span class="nav-text">文件系统常用命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shell编程"><span class="nav-number">9.</span> <span class="nav-text">Shell编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Shell是什么"><span class="nav-number">9.1.</span> <span class="nav-text">Shell是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shell脚本执行的方式"><span class="nav-number">9.2.</span> <span class="nav-text">shell脚本执行的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#echo-输出命令"><span class="nav-number">9.3.</span> <span class="nav-text">echo 输出命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#历史命令保存（每个登录用户各自保存）"><span class="nav-number">9.4.</span> <span class="nav-text">历史命令保存（每个登录用户各自保存）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用别名和快捷键"><span class="nav-number">9.5.</span> <span class="nav-text">常用别名和快捷键</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#命令执行顺序"><span class="nav-number">9.5.1.</span> <span class="nav-text">命令执行顺序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bash常用快捷键"><span class="nav-number">9.5.2.</span> <span class="nav-text">Bash常用快捷键</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bash的输入输出重定向"><span class="nav-number">9.6.</span> <span class="nav-text">Bash的输入输出重定向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多命令和管道符"><span class="nav-number">9.7.</span> <span class="nav-text">多命令和管道符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bash变量"><span class="nav-number">9.8.</span> <span class="nav-text">Bash变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用户自定义变量"><span class="nav-number">9.8.1.</span> <span class="nav-text">用户自定义变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#环境变量：保存和系统操作环境相关的数据"><span class="nav-number">9.8.2.</span> <span class="nav-text">环境变量：保存和系统操作环境相关的数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#位置参数变量"><span class="nav-number">9.8.3.</span> <span class="nav-text">位置参数变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#预定义变量"><span class="nav-number">9.8.4.</span> <span class="nav-text">预定义变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#read命令"><span class="nav-number">9.8.5.</span> <span class="nav-text">read命令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数值运算和运算符"><span class="nav-number">9.9.</span> <span class="nav-text">数值运算和运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#declare命令"><span class="nav-number">9.9.1.</span> <span class="nav-text">declare命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#采用expr或者let运算工具"><span class="nav-number">9.9.2.</span> <span class="nav-text">采用expr或者let运算工具</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#采用-运算式-或者-运算式"><span class="nav-number">9.9.3.</span> <span class="nav-text">采用$((运算式))或者$[运算式]</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量测试与内容替换"><span class="nav-number">9.10.</span> <span class="nav-text">变量测试与内容替换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#环境变量配置文件"><span class="nav-number">9.10.1.</span> <span class="nav-text">环境变量配置文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符提取命令"><span class="nav-number">9.11.</span> <span class="nav-text">字符提取命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件判断"><span class="nav-number">9.12.</span> <span class="nav-text">条件判断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流程控制"><span class="nav-number">9.13.</span> <span class="nav-text">流程控制</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">白哥</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+-->
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"superSample":2,"width":200,"height":300,"position":"left","hOffset":40,"vOffset":-5},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+<!-- 页面点击出现社会主义核心价值观 -->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+</html>

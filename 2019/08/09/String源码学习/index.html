@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-big-counter.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="白哥的博客" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="String源码学习变量12345678//字符串存储于该字符数组，因为是private final所以不能继承private final char value[];//hash值，默认为0private int hash; //序列化，类字符串是序列化流协议中的特殊字符串。（用处）private static final ObjectStreamField[] serialPersistentF">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="String源码学习">
+<meta property="og:url" content="http://yoursite.com/2019/08/09/String源码学习/index.html">
+<meta property="og:site_name" content="白哥的博客">
+<meta property="og:description" content="String源码学习变量12345678//字符串存储于该字符数组，因为是private final所以不能继承private final char value[];//hash值，默认为0private int hash; //序列化，类字符串是序列化流协议中的特殊字符串。（用处）private static final ObjectStreamField[] serialPersistentF">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-31T15:56:04.793Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="String源码学习">
+<meta name="twitter:description" content="String源码学习变量12345678//字符串存储于该字符数组，因为是private final所以不能继承private final char value[];//hash值，默认为0private int hash; //序列化，类字符串是序列化流协议中的特殊字符串。（用处）private static final ObjectStreamField[] serialPersistentF">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'YQTYRQPKX7',
+      apiKey: '063bb125461fd4898a2d44f8eea9f5c3',
+      indexName: 'blogsearch',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"输入关键字","hits_empty":"没有找到与 ${query} 相关的内容","hits_stats":"${hits}条相关记录，共耗时${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/09/String源码学习/">
+
+
+
+
+
+  <title>String源码学习 | 白哥的博客</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+	<a href="https://github.com/1069121849" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">白哥的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">白哥的博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/09/String源码学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="白哥">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="白哥的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">String源码学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-09T22:34:42+08:00">
+                2019-08-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4.5k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  22 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="String源码学习"><a href="#String源码学习" class="headerlink" title="String源码学习"></a>String源码学习</h1><h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//字符串存储于该字符数组，因为是private final所以不能继承</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">char</span> value[];</span><br><span class="line"><span class="comment">//hash值，默认为0</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> hash; </span><br><span class="line"><span class="comment">//序列化，类字符串是序列化流协议中的特殊字符串。（用处）</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ObjectStreamField[] serialPersistentFields = <span class="keyword">new</span> ObjectStreamField[<span class="number">0</span>];</span><br><span class="line"><span class="comment">//创建一个比较器Comparator内部类对象，重写了其compare方法。</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Comparator&lt;String&gt; CASE_INSENSITIVE_ORDER = <span class="keyword">new</span> CaseInsensitiveComparator();</span><br></pre></td></tr></table></figure>
+<p>CaseInsensitiveComparator重写的compare方法：不区分大小写</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(String s1, String s2)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> n1 = s1.length();</span><br><span class="line">       <span class="keyword">int</span> n2 = s2.length();</span><br><span class="line">       <span class="keyword">int</span> min = Math.min(n1, n2);</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; min; i++) &#123;</span><br><span class="line">           <span class="keyword">char</span> c1 = s1.charAt(i);</span><br><span class="line">           <span class="keyword">char</span> c2 = s2.charAt(i);</span><br><span class="line">           <span class="keyword">if</span> (c1 != c2) &#123;</span><br><span class="line">               <span class="comment">//不区分大小写的比较</span></span><br><span class="line">               c1 = Character.toUpperCase(c1);</span><br><span class="line">               c2 = Character.toUpperCase(c2);</span><br><span class="line">               <span class="keyword">if</span> (c1 != c2) &#123;</span><br><span class="line">                   c1 = Character.toLowerCase(c1);</span><br><span class="line">                   c2 = Character.toLowerCase(c2);</span><br><span class="line">                   <span class="keyword">if</span> (c1 != c2) &#123;</span><br><span class="line">                       <span class="keyword">return</span> c1 - c2;</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> n1 - n2;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//无参构造为空字符串</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">String</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.value = <span class="string">""</span>.value;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//带有String的构造方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">String</span><span class="params">(String original)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.value = original.value;</span><br><span class="line">        <span class="keyword">this</span>.hash = original.hash;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//带有char数组的构造方法，把字符数组转为字符串，深拷贝该数组</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">String</span><span class="params">(<span class="keyword">char</span> value[])</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.value = Arrays.copyOf(value, value.length);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//参数：字符数组， 开始下标， 字符的数量</span></span><br><span class="line"><span class="comment">//从字符数组的offset开始，复制count个字符</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">String</span><span class="params">(<span class="keyword">char</span> value[], <span class="keyword">int</span> offset, <span class="keyword">int</span> count)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//开始下标小于0，抛出下标越界异常</span></span><br><span class="line">    <span class="keyword">if</span> (offset &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> StringIndexOutOfBoundsException(offset);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如果count&lt;=0,而且offset合法，则定义一个空字符串""</span></span><br><span class="line">    <span class="keyword">if</span> (count &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (count &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> StringIndexOutOfBoundsException(count);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (offset &lt;= value.length) &#123;</span><br><span class="line">            <span class="keyword">this</span>.value = <span class="string">""</span>.value;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// count越界异常</span></span><br><span class="line">    <span class="keyword">if</span> (offset &gt; value.length - count) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> StringIndexOutOfBoundsException(offset + count);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如果合法，则复制到字符串的char数组中</span></span><br><span class="line">    <span class="keyword">this</span>.value = Arrays.copyOfRange(value, offset, offset+count);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//参数：int数组，开始下标，数量</span></span><br><span class="line"><span class="comment">//作用：把一个Unicode的int数组转为字符串</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">String</span><span class="params">(<span class="keyword">int</span>[] codePoints, <span class="keyword">int</span> offset, <span class="keyword">int</span> count)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//判断都于char数组的构造方法一致</span></span><br><span class="line">    <span class="keyword">if</span> (offset &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> StringIndexOutOfBoundsException(offset);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (count &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (count &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> StringIndexOutOfBoundsException(count);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (offset &lt;= codePoints.length) &#123;</span><br><span class="line">            <span class="keyword">this</span>.value = <span class="string">""</span>.value;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (offset &gt; codePoints.length - count) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> StringIndexOutOfBoundsException(offset + count);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> end = offset + count;</span><br><span class="line">    <span class="keyword">int</span> n = count;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = offset; i &lt; end; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> c = codePoints[i];</span><br><span class="line">        <span class="comment">//如果是在BMP范围内，则直接继续</span></span><br><span class="line">        <span class="keyword">if</span> (Character.isBmpCodePoint(c))</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        <span class="comment">//如果不在BMP范围内，则16位存储不了，n++；</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (Character.isValidCodePoint(c))</span><br><span class="line">            n++;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(Integer.toString(c));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//通过上面的计算，得到Unicode数组转为char数组的长度n</span></span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">char</span>[] v = <span class="keyword">new</span> <span class="keyword">char</span>[n];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = offset, j = <span class="number">0</span>; i &lt; end; i++, j++) &#123;</span><br><span class="line">        <span class="keyword">int</span> c = codePoints[i];</span><br><span class="line">        <span class="keyword">if</span> (Character.isBmpCodePoint(c))</span><br><span class="line">            v[j] = (<span class="keyword">char</span>)c;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="comment">//不在BMP范围内，需要多一位存储</span></span><br><span class="line">            Character.toSurrogates(c, v, j++);</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//最后把value指向v数组</span></span><br><span class="line">    <span class="keyword">this</span>.value = v;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//参数：byte数组，开始下标，长度，编码格式名称</span></span><br><span class="line"><span class="comment">//作用：通过编码格式来解码指定的byte数组，默认的编码格式为ISO-8859-1</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">String</span><span class="params">(<span class="keyword">byte</span> bytes[], <span class="keyword">int</span> offset, <span class="keyword">int</span> length, String charsetName)</span> <span class="keyword">throws</span> UnsupportedEncodingException </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (charsetName == <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"charsetName"</span>);</span><br><span class="line">    checkBounds(bytes, offset, length);</span><br><span class="line">    <span class="keyword">this</span>.value = StringCoding.decode(charsetName, bytes, offset, length);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//同上，把整个byte数组转为字符串</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">String</span><span class="params">(<span class="keyword">byte</span> bytes[], String charsetName)</span> <span class="keyword">throws</span> UnsupportedEncodingException </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>(bytes, <span class="number">0</span>, bytes.length, charsetName);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//直接传入编码，按照该格式转为字符串</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">String</span><span class="params">(<span class="keyword">byte</span> bytes[], <span class="keyword">int</span> offset, <span class="keyword">int</span> length, Charset charset)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (charset == <span class="keyword">null</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"charset"</span>);</span><br><span class="line">    checkBounds(bytes, offset, length);</span><br><span class="line">    <span class="keyword">this</span>.value =  StringCoding.decode(charset, bytes, offset, length);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//同上</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">String</span><span class="params">(<span class="keyword">byte</span> bytes[], Charset charset)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>(bytes, <span class="number">0</span>, bytes.length, charset);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//同上</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">String</span><span class="params">(<span class="keyword">byte</span> bytes[], <span class="keyword">int</span> offset, <span class="keyword">int</span> length)</span> </span>&#123;</span><br><span class="line">    checkBounds(bytes, offset, length);</span><br><span class="line">    <span class="keyword">this</span>.value = StringCoding.decode(bytes, offset, length);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//将StringBuffer转为String，使用了synchronized锁住变量</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">String</span><span class="params">(StringBuffer buffer)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">synchronized</span>(buffer) &#123;</span><br><span class="line">        <span class="keyword">this</span>.value = Arrays.copyOf(buffer.getValue(), buffer.length());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//StringBuilder转为String</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">String</span><span class="params">(StringBuilder builder)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.value = Arrays.copyOf(builder.getValue(), builder.length());</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//私有的构造方法，直接共享2个字符数组，节省资源，性能更好，但是可能出现内存泄漏</span></span><br><span class="line">String(<span class="keyword">char</span>[] value, <span class="keyword">boolean</span> share) &#123;</span><br><span class="line">    <span class="comment">// assert share : "unshared not supported";</span></span><br><span class="line">    <span class="keyword">this</span>.value = value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>BMP（Basic Multilingual Plane，基本多文种平面）：</strong><br>只需要知道BMP代表了一个字符范围，在BMP范围内的字符，可以用16位表示，而在BMP以外的字符，需要4个字节（即32位，不止16位）表示。</p>
+<h2 id="普通方法"><a href="#普通方法" class="headerlink" title="普通方法"></a>普通方法</h2><h3 id="checkBounds"><a href="#checkBounds" class="headerlink" title="checkBounds"></a>checkBounds</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//检查越界方法</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">checkBounds</span><span class="params">(<span class="keyword">byte</span>[] bytes, <span class="keyword">int</span> offset, <span class="keyword">int</span> length)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (length &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> StringIndexOutOfBoundsException(length);</span><br><span class="line">    <span class="keyword">if</span> (offset &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> StringIndexOutOfBoundsException(offset);</span><br><span class="line">    <span class="keyword">if</span> (offset &gt; bytes.length - length)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> StringIndexOutOfBoundsException(offset + length);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="length"><a href="#length" class="headerlink" title="length()"></a>length()</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//返回字符串的长度，即字符数组的长度</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">length</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> value.length;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="isEmpty"><a href="#isEmpty" class="headerlink" title="isEmpty()"></a>isEmpty()</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//判断是否为空</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> value.length == <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="charAt"><a href="#charAt" class="headerlink" title="charAt"></a>charAt</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//参数：一个下标index</span></span><br><span class="line"><span class="comment">//作用：返回字符串中该位置的字符</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">charAt</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//越界检查</span></span><br><span class="line">    <span class="keyword">if</span> ((index &lt; <span class="number">0</span>) || (index &gt;= value.length)) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> StringIndexOutOfBoundsException(index);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> value[index];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="getChars"><a href="#getChars" class="headerlink" title="getChars"></a>getChars</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//参数：目标数组，开始下标</span></span><br><span class="line"><span class="comment">//作用：把字符串的所有字符复制到字符数组中的开始下标直到字符串结束</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getChars</span><span class="params">(<span class="keyword">char</span> dst[], <span class="keyword">int</span> dstBegin)</span> </span>&#123;</span><br><span class="line">    System.arraycopy(value, <span class="number">0</span>, dst, dstBegin, value.length);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//参数: 开始下标，结束下标，目标字符数组， 目标数组开始下标</span></span><br><span class="line"><span class="comment">//作用：把字符串从开始下标到结束下标的多个字符，赋值到目标数组的 开始下标 到 目标开始下标+（结束下标-开始下标）</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getChars</span><span class="params">(<span class="keyword">int</span> srcBegin, <span class="keyword">int</span> srcEnd, <span class="keyword">char</span> dst[], <span class="keyword">int</span> dstBegin)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//越界检查</span></span><br><span class="line">    <span class="keyword">if</span> (srcBegin &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> StringIndexOutOfBoundsException(srcBegin);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (srcEnd &gt; value.length) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> StringIndexOutOfBoundsException(srcEnd);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (srcBegin &gt; srcEnd) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> StringIndexOutOfBoundsException(srcEnd - srcBegin);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//把value数组中，从srcBegin开始的字符，复制到dst，从dstBegin开始，长度为srcEnd-srcBegin</span></span><br><span class="line">    System.arraycopy(value, srcBegin, dst, dstBegin, srcEnd - srcBegin);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>getBytes</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//指定解码格式获取字符串的byte数组</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">byte</span>[] getBytes(String charsetName) <span class="keyword">throws</span> UnsupportedEncodingException &#123;</span><br><span class="line">    <span class="keyword">if</span> (charsetName == <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</span><br><span class="line">    <span class="keyword">return</span> StringCoding.encode(charsetName, value, <span class="number">0</span>, value.length);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="equals"><a href="#equals" class="headerlink" title="equals"></a>equals</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//判断字符串和传入的Object是否相等</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object anObject)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span> == anObject) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//判读anObject是否是字符串</span></span><br><span class="line">    <span class="keyword">if</span> (anObject <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line">        String anotherString = (String)anObject;</span><br><span class="line">        <span class="keyword">int</span> n = value.length;</span><br><span class="line">        <span class="comment">//2个字符串相等，其value数组长度一定相等</span></span><br><span class="line">        <span class="keyword">if</span> (n == anotherString.value.length) &#123;</span><br><span class="line">            <span class="keyword">char</span> v1[] = value;</span><br><span class="line">            <span class="keyword">char</span> v2[] = anotherString.value;</span><br><span class="line">            <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">            <span class="comment">//比较2个数组的每一个字符，如果有不相等的直接return false,如果全部相等则为true</span></span><br><span class="line">            <span class="keyword">while</span> (n-- != <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (v1[i] != v2[i])</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//非同步的equals，参数是一个AbstractStringBuilder，比较的方式和equals一样</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">nonSyncContentEquals</span><span class="params">(AbstractStringBuilder sb)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> v1[] = value;</span><br><span class="line">    <span class="keyword">char</span> v2[] = sb.getValue();</span><br><span class="line">    <span class="keyword">int</span> n = v1.length;</span><br><span class="line">    <span class="keyword">if</span> (n != sb.length()) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (v1[i] != v2[i]) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//用于判断与CharSequence是否相等</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">contentEquals</span><span class="params">(CharSequence cs)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 判断cs是不是一个StringBuffer，StringBuilder</span></span><br><span class="line">    <span class="keyword">if</span> (cs <span class="keyword">instanceof</span> AbstractStringBuilder) &#123;</span><br><span class="line">        <span class="keyword">if</span> (cs <span class="keyword">instanceof</span> StringBuffer) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span>(cs) &#123;</span><br><span class="line">               <span class="keyword">return</span> nonSyncContentEquals((AbstractStringBuilder)cs);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> nonSyncContentEquals((AbstractStringBuilder)cs);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//是String的话直接使用equals</span></span><br><span class="line">    <span class="keyword">if</span> (cs <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line">        <span class="keyword">return</span> equals(cs);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 是CharSequence的话</span></span><br><span class="line">    <span class="keyword">char</span> v1[] = value;</span><br><span class="line">    <span class="keyword">int</span> n = v1.length;</span><br><span class="line">    <span class="keyword">if</span> (n != cs.length()) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (v1[i] != cs.charAt(i)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//用于是判断与StringBuffer是否相等</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">contentEquals</span><span class="params">(StringBuffer sb)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> contentEquals((CharSequence)sb);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//忽略大小写的比较</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equalsIgnoreCase</span><span class="params">(String anotherString)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">this</span> == anotherString) ? <span class="keyword">true</span></span><br><span class="line">            : (anotherString != <span class="keyword">null</span>)</span><br><span class="line">            &amp;&amp; (anotherString.value.length == value.length)</span><br><span class="line">            &amp;&amp; regionMatches(<span class="keyword">true</span>, <span class="number">0</span>, anotherString, <span class="number">0</span>, value.length);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="补充：charSequence"><a href="#补充：charSequence" class="headerlink" title="补充：charSequence"></a>补充：charSequence</h3><p>charSequence是一个接口，表示char值的一个可读序列。此接口对许多不同种类的char序列提供统一的自读访问。此接口不修改该equals和hashCode方法的常规协定，因此，通常未定义比较实现 CharSequence 的两个对象的结果。他有几个实现类：CharBuffer、String、StringBuffer、StringBuilder。</p>
+<p>　　CharSequence与String都能用于定义字符串，但CharSequence的值是可读可写序列，而String的值是只读序列。</p>
+<p>　　对于一个抽象类或者是接口类，不能使用new来进行赋值，但是可以通过以下的方式来进行实例的创建：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">　　CharSequence cs=”hello”;</span><br></pre></td></tr></table></figure></p>
+<h3 id="compareTo"><a href="#compareTo" class="headerlink" title="compareTo"></a>compareTo</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(String anotherString)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> len1 = value.length;</span><br><span class="line">    <span class="keyword">int</span> len2 = anotherString.value.length;</span><br><span class="line">    <span class="keyword">int</span> lim = Math.min(len1, len2);</span><br><span class="line">    <span class="keyword">char</span> v1[] = value;</span><br><span class="line">    <span class="keyword">char</span> v2[] = anotherString.value;</span><br><span class="line">    <span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (k &lt; lim) &#123;</span><br><span class="line">        <span class="keyword">char</span> c1 = v1[k];</span><br><span class="line">        <span class="keyword">char</span> c2 = v2[k];</span><br><span class="line">        <span class="comment">//比较2个字符串的每个字符，如果不相同，则返回c1-c2，即字母表排序大的大</span></span><br><span class="line">        <span class="keyword">if</span> (c1 != c2) &#123;</span><br><span class="line">            <span class="keyword">return</span> c1 - c2;</span><br><span class="line">        &#125;</span><br><span class="line">        k++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如果长度不一，而且长和短的前面全部重合，则长的长。</span></span><br><span class="line">    <span class="keyword">return</span> len1 - len2;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//忽略大小写的比较，直接调用的是定义的静态内部类的compare方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareToIgnoreCase</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> CASE_INSENSITIVE_ORDER.compare(<span class="keyword">this</span>, str);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//作用：判断2个字符串从tooffset开始，与other的ooffset开始，长度为len的子字符串想否相等。</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">regionMatches</span><span class="params">(<span class="keyword">int</span> toffset, String other, <span class="keyword">int</span> ooffset,<span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> ta[] = value;</span><br><span class="line">    <span class="keyword">int</span> to = toffset;</span><br><span class="line">    <span class="keyword">char</span> pa[] = other.value;</span><br><span class="line">    <span class="keyword">int</span> po = ooffset;</span><br><span class="line">    <span class="comment">// 越界检测.</span></span><br><span class="line">    <span class="keyword">if</span> ((ooffset &lt; <span class="number">0</span>) || (toffset &lt; <span class="number">0</span>)</span><br><span class="line">            || (toffset &gt; (<span class="keyword">long</span>)value.length - len)</span><br><span class="line">            || (ooffset &gt; (<span class="keyword">long</span>)other.value.length - len)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//遍历2个子串，如果不相等则为false</span></span><br><span class="line">    <span class="keyword">while</span> (len-- &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (ta[to++] != pa[po++]) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//作用：判断从tooffset开始，与other的ooffset开始，长度为len的字符串想否相等。ignoreCase如果为true，则无视大小写</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">regionMatches</span><span class="params">(<span class="keyword">boolean</span> ignoreCase, <span class="keyword">int</span> toffset,String other, <span class="keyword">int</span> ooffset, <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> ta[] = value;</span><br><span class="line">    <span class="keyword">int</span> to = toffset;</span><br><span class="line">    <span class="keyword">char</span> pa[] = other.value;</span><br><span class="line">    <span class="keyword">int</span> po = ooffset;</span><br><span class="line">    <span class="comment">// 越界检查</span></span><br><span class="line">    <span class="keyword">if</span> ((ooffset &lt; <span class="number">0</span>) || (toffset &lt; <span class="number">0</span>)</span><br><span class="line">            || (toffset &gt; (<span class="keyword">long</span>)value.length - len)</span><br><span class="line">            || (ooffset &gt; (<span class="keyword">long</span>)other.value.length - len)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (len-- &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">char</span> c1 = ta[to++];</span><br><span class="line">        <span class="keyword">char</span> c2 = pa[po++];</span><br><span class="line">        <span class="keyword">if</span> (c1 == c2) &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (ignoreCase) &#123;</span><br><span class="line">            <span class="comment">//如果ignoreCase为true，则进行忽略大小写的比较</span></span><br><span class="line">            <span class="comment">// continue.</span></span><br><span class="line">            <span class="keyword">char</span> u1 = Character.toUpperCase(c1);</span><br><span class="line">            <span class="keyword">char</span> u2 = Character.toUpperCase(c2);</span><br><span class="line">            <span class="keyword">if</span> (u1 == u2) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 转化为大写，Georgian alphabet字母可能会比较错误，所以转化为小写再比较一次。</span></span><br><span class="line">            <span class="keyword">if</span> (Character.toLowerCase(u1) == Character.toLowerCase(u2)) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="startsWith"><a href="#startsWith" class="headerlink" title="startsWith"></a>startsWith</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//判断字符串的toffset下标之后是不是prefix</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">startsWith</span><span class="params">(String prefix, <span class="keyword">int</span> toffset)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> ta[] = value;</span><br><span class="line">    <span class="keyword">int</span> to = toffset;</span><br><span class="line">    <span class="keyword">char</span> pa[] = prefix.value;</span><br><span class="line">    <span class="keyword">int</span> po = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> pc = prefix.value.length;</span><br><span class="line">    <span class="comment">// 越界检查</span></span><br><span class="line">    <span class="keyword">if</span> ((toffset &lt; <span class="number">0</span>) || (toffset &gt; value.length - pc)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//判断字符串的toffset与prefix是否相等，不相等则为false</span></span><br><span class="line">    <span class="keyword">while</span> (--pc &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (ta[to++] != pa[po++]) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//判断字符串的开头是否为prefix</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">startsWith</span><span class="params">(String prefix)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> startsWith(prefix, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//判断字符串的结尾是否为prefix</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">endsWith</span><span class="params">(String suffix)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//从字符串的最后suffix长度是否为suffix</span></span><br><span class="line">    <span class="keyword">return</span> startsWith(suffix, value.length - suffix.value.length);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="hashCode"><a href="#hashCode" class="headerlink" title="hashCode"></a>hashCode</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//求hash值</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> h = hash;</span><br><span class="line">    <span class="keyword">if</span> (h == <span class="number">0</span> &amp;&amp; value.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">char</span> val[] = value;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; value.length; i++) &#123;</span><br><span class="line">            <span class="comment">//31*h+字符的值</span></span><br><span class="line">            h = <span class="number">31</span> * h + val[i];</span><br><span class="line">        &#125;</span><br><span class="line">        hash = h;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> h;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="indexOf"><a href="#indexOf" class="headerlink" title="indexOf"></a>indexOf</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//作用，查找字符串中占2位的字符</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">indexOfSupplementary</span><span class="params">(<span class="keyword">int</span> ch, <span class="keyword">int</span> fromIndex)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (Character.isValidCodePoint(ch)) &#123;</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">char</span>[] value = <span class="keyword">this</span>.value;</span><br><span class="line">        <span class="comment">//取出字符的高低2位</span></span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">char</span> hi = Character.highSurrogate(ch);</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">char</span> lo = Character.lowSurrogate(ch);</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">int</span> max = value.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = fromIndex; i &lt; max; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (value[i] == hi &amp;&amp; value[i + <span class="number">1</span>] == lo) &#123;</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//作用：查找ch所在字符串的下标</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">indexOf</span><span class="params">(<span class="keyword">int</span> ch, <span class="keyword">int</span> fromIndex)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> max = value.length;</span><br><span class="line">    <span class="keyword">if</span> (fromIndex &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        fromIndex = <span class="number">0</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (fromIndex &gt;= max) &#123;</span><br><span class="line">        <span class="comment">//越界</span></span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (ch &lt; Character.MIN_SUPPLEMENTARY_CODE_POINT) &#123;</span><br><span class="line">        <span class="comment">//处理大多数情况（ch是BMP代码点或负值（无效代码点））</span></span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">char</span>[] value = <span class="keyword">this</span>.value;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = fromIndex; i &lt; max; i++) &#123;</span><br><span class="line">            <span class="comment">//找到了目标字符，直接返回该下标</span></span><br><span class="line">            <span class="keyword">if</span> (value[i] == ch) &#123;</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">//处理2位的字符</span></span><br><span class="line">        <span class="keyword">return</span> indexOfSupplementary(ch, fromIndex);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//作用：</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">indexOf</span><span class="params">(<span class="keyword">char</span>[] source, <span class="keyword">int</span> sourceOffset, <span class="keyword">int</span> sourceCount, <span class="keyword">char</span>[] target, <span class="keyword">int</span> targetOffset, <span class="keyword">int</span> targetCount, <span class="keyword">int</span> fromIndex)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//越界检查和处理</span></span><br><span class="line">    <span class="keyword">if</span> (fromIndex &gt;= sourceCount) &#123;</span><br><span class="line">        <span class="keyword">return</span> (targetCount == <span class="number">0</span> ? sourceCount : -<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (fromIndex &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        fromIndex = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (targetCount == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> fromIndex;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">char</span> first = target[targetOffset];</span><br><span class="line">    <span class="comment">//比对所能到达的最大下标</span></span><br><span class="line">    <span class="keyword">int</span> max = sourceOffset + (sourceCount - targetCount);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = sourceOffset + fromIndex; i &lt;= max; i++) &#123;</span><br><span class="line">        <span class="comment">//查找所要查找的第一个字符</span></span><br><span class="line">        <span class="keyword">if</span> (source[i] != first) &#123;</span><br><span class="line">            <span class="keyword">while</span> (++i &lt;= max &amp;&amp; source[i] != first);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//比较之后的全部</span></span><br><span class="line">        <span class="keyword">if</span> (i &lt;= max) &#123;</span><br><span class="line">            <span class="keyword">int</span> j = i + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> end = j + targetCount - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> k = targetOffset + <span class="number">1</span>; j &lt; end &amp;&amp; source[j]</span><br><span class="line">                    == target[k]; j++, k++);</span><br><span class="line">            <span class="keyword">if</span> (j == end) &#123;</span><br><span class="line">                <span class="comment">//如果j==end，则说明全部相等，即找得到源字符数组中的目标数组的下标</span></span><br><span class="line">                <span class="keyword">return</span> i - sourceOffset;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//找不到返回-1</span></span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//其他方法则是调用以上方法</span></span><br></pre></td></tr></table></figure>
+<h3 id="lastIndexOf"><a href="#lastIndexOf" class="headerlink" title="lastIndexOf"></a>lastIndexOf</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//参数：source 目标字符数组； sourceOffset 查找的开始下标； sourceCount 目标数组大小； target 查找的字符数组； targetOffset ；  targetCount  ； fromIndex 开始查找的下标</span></span><br><span class="line"><span class="comment">//作用：查找到字符数组在目标字符数组的最后位置</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">lastIndexOf</span><span class="params">(<span class="keyword">char</span>[] source, <span class="keyword">int</span> sourceOffset, <span class="keyword">int</span> sourceCount, <span class="keyword">char</span>[] target, <span class="keyword">int</span> targetOffset, <span class="keyword">int</span> targetCount, <span class="keyword">int</span> fromIndex)</span> </span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * Check arguments; return immediately where possible. For</span></span><br><span class="line"><span class="comment">     * consistency, don't check for null str.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">int</span> rightIndex = sourceCount - targetCount;</span><br><span class="line">    <span class="keyword">if</span> (fromIndex &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (fromIndex &gt; rightIndex) &#123;</span><br><span class="line">        fromIndex = rightIndex;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/* Empty string always matches. */</span></span><br><span class="line">    <span class="keyword">if</span> (targetCount == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> fromIndex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> strLastIndex = targetOffset + targetCount - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">char</span> strLastChar = target[strLastIndex];</span><br><span class="line">    <span class="keyword">int</span> min = sourceOffset + targetCount - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> i = min + fromIndex;</span><br><span class="line"></span><br><span class="line">startSearchForLastChar:</span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">        <span class="keyword">while</span> (i &gt;= min &amp;&amp; source[i] != strLastChar) &#123;</span><br><span class="line">            i--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (i &lt; min) &#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> j = i - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> start = j - (targetCount - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">int</span> k = strLastIndex - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (j &gt; start) &#123;</span><br><span class="line">            <span class="keyword">if</span> (source[j--] != target[k--]) &#123;</span><br><span class="line">                i--;</span><br><span class="line">                <span class="keyword">continue</span> startSearchForLastChar;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> start - sourceOffset + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="substring"><a href="#substring" class="headerlink" title="substring"></a>substring</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">substring</span><span class="params">(<span class="keyword">int</span> beginIndex)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//越界检查</span></span><br><span class="line">    <span class="keyword">if</span> (beginIndex &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> StringIndexOutOfBoundsException(beginIndex);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> subLen = value.length - beginIndex;</span><br><span class="line">    <span class="keyword">if</span> (subLen &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> StringIndexOutOfBoundsException(subLen);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如果从0开始，则直接返回该字符串，否则，从beginIndex开始subLen个字符，创建一个新字符串</span></span><br><span class="line">	<span class="keyword">return</span> (beginIndex == <span class="number">0</span>) ? <span class="keyword">this</span> : <span class="keyword">new</span> String(value, beginIndex, subLen);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">substring</span><span class="params">(<span class="keyword">int</span> beginIndex, <span class="keyword">int</span> endIndex)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//越界检查</span></span><br><span class="line">    <span class="keyword">if</span> (beginIndex &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> StringIndexOutOfBoundsException(beginIndex);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (endIndex &gt; value.length) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> StringIndexOutOfBoundsException(endIndex);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> subLen = endIndex - beginIndex;</span><br><span class="line">	<span class="comment">//检查输入是否合理</span></span><br><span class="line">    <span class="keyword">if</span> (subLen &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> StringIndexOutOfBoundsException(subLen);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如果从0到length，则直接返回该字符串，否则，返回从beginIndex开始subLen个字符创建的一个新字符串</span></span><br><span class="line">    <span class="keyword">return</span> ((beginIndex == <span class="number">0</span>) &amp;&amp; (endIndex == value.length)) ? <span class="keyword">this</span></span><br><span class="line">            : <span class="keyword">new</span> String(value, beginIndex, subLen);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//返回类型为CharSequence的截取</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> CharSequence <span class="title">subSequence</span><span class="params">(<span class="keyword">int</span> beginIndex, <span class="keyword">int</span> endIndex)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.substring(beginIndex, endIndex);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="concat"><a href="#concat" class="headerlink" title="concat"></a>concat</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//作用：拼接字符串</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">concat</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> otherLen = str.length();</span><br><span class="line">    <span class="comment">//如果拼接的字符串长度为0，则无需拼接</span></span><br><span class="line">    <span class="keyword">if</span> (otherLen == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> len = value.length;</span><br><span class="line">    <span class="comment">//把原字符串放到buf数组的开头，即0到len处</span></span><br><span class="line">    <span class="keyword">char</span> buf[] = Arrays.copyOf(value, len + otherLen);</span><br><span class="line">    <span class="comment">//把str即拼接的字符串，拼接到buf的len之后</span></span><br><span class="line">    str.getChars(buf, len);</span><br><span class="line">    <span class="comment">//返回拼接后的新字符串即 源字符串+拼接的字符串</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> String(buf, <span class="keyword">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="replace"><a href="#replace" class="headerlink" title="replace"></a>replace</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//作用：使用newChar替换oldChar，返回替换后的新字符串</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">replace</span><span class="params">(<span class="keyword">char</span> oldChar, <span class="keyword">char</span> newChar)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//如果替换的字符一样则无需替换</span></span><br><span class="line">    <span class="keyword">if</span> (oldChar != newChar) &#123;</span><br><span class="line">        <span class="keyword">int</span> len = value.length;</span><br><span class="line">        <span class="keyword">int</span> i = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">char</span>[] val = value;</span><br><span class="line">        <span class="comment">//找到第一个oldChar，找不到则直接返回原字符串</span></span><br><span class="line">        <span class="keyword">while</span> (++i &lt; len) &#123;</span><br><span class="line">            <span class="keyword">if</span> (val[i] == oldChar) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//找到了oldChar则进入</span></span><br><span class="line">        <span class="keyword">if</span> (i &lt; len) &#123;</span><br><span class="line">            <span class="keyword">char</span> buf[] = <span class="keyword">new</span> <span class="keyword">char</span>[len];</span><br><span class="line">            <span class="comment">//把之前的oldChar放入buf</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">                buf[j] = val[j];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//之后的如果有oldChar则替换成newChar</span></span><br><span class="line">            <span class="keyword">while</span> (i &lt; len) &#123;</span><br><span class="line">                <span class="keyword">char</span> c = val[i];</span><br><span class="line">                buf[i] = (c == oldChar) ? newChar : c;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//返回替换后的字符串</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> String(buf, <span class="keyword">true</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="contains"><a href="#contains" class="headerlink" title="contains"></a>contains</h3> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//坚持字符串是否含有目标CharSequence</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(CharSequence s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> indexOf(s.toString()) &gt; -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="补充：StringJoiner"><a href="#补充：StringJoiner" class="headerlink" title="补充：StringJoiner"></a>补充：StringJoiner</h3><p>StringJoiner用于构造分隔的字符序列通过分隔符，并可选择以提供的前缀开头并以提供的后缀结束。</p>
+<h4 id="变量-1"><a href="#变量-1" class="headerlink" title="变量"></a>变量</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> String prefix; <span class="comment">//前缀</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> String delimiter; <span class="comment">//分隔符</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> String suffix;<span class="comment">//后缀</span></span><br><span class="line"><span class="keyword">private</span> StringBuilder value;<span class="comment">//StringBuilder存储值</span></span><br><span class="line"><span class="keyword">private</span> String emptyValue;</span><br></pre></td></tr></table></figure>
+<h4 id="构造函数-1"><a href="#构造函数-1" class="headerlink" title="构造函数"></a>构造函数</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//传入分隔符的构造函数</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">StringJoiner</span><span class="params">(CharSequence delimiter)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>(delimiter, <span class="string">""</span>, <span class="string">""</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//传入分隔符、前缀、后缀的构造函数</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">StringJoiner</span><span class="params">(CharSequence delimiter,</span></span></span><br><span class="line"><span class="function"><span class="params">                    CharSequence prefix,</span></span></span><br><span class="line"><span class="function"><span class="params">                    CharSequence suffix)</span> </span>&#123;</span><br><span class="line">    Objects.requireNonNull(prefix, <span class="string">"The prefix must not be null"</span>);</span><br><span class="line">    Objects.requireNonNull(delimiter, <span class="string">"The delimiter must not be null"</span>);</span><br><span class="line">    Objects.requireNonNull(suffix, <span class="string">"The suffix must not be null"</span>);</span><br><span class="line">    <span class="keyword">this</span>.prefix = prefix.toString();</span><br><span class="line">    <span class="keyword">this</span>.delimiter = delimiter.toString();</span><br><span class="line">    <span class="keyword">this</span>.suffix = suffix.toString();</span><br><span class="line">    <span class="comment">//空值在这里置为前缀+后缀</span></span><br><span class="line">    <span class="keyword">this</span>.emptyValue = <span class="keyword">this</span>.prefix + <span class="keyword">this</span>.suffix;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="toString-NaN"><a href="#toString-NaN" class="headerlink" title="toString"></a>toString</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (value == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="comment">//值为空则返回前缀+后缀，在初始化时已经赋值给emptyValue</span></span><br><span class="line">        <span class="keyword">return</span> emptyValue;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">//后缀为空则直接返回value</span></span><br><span class="line">        <span class="keyword">if</span> (suffix.equals(<span class="string">""</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span> value.toString();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">int</span> initialLength = value.length();</span><br><span class="line">            String result = value.append(suffix).toString();</span><br><span class="line">            <span class="comment">//更新其长度</span></span><br><span class="line">            value.setLength(initialLength);</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="prepareBuilder"><a href="#prepareBuilder" class="headerlink" title="prepareBuilder"></a>prepareBuilder</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> StringBuilder <span class="title">prepareBuilder</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (value != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="comment">//不为空时添加一个分隔符</span></span><br><span class="line">        value.append(delimiter);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">//为空时添加一个前缀符</span></span><br><span class="line">        value = <span class="keyword">new</span> StringBuilder().append(prefix);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="length-1"><a href="#length-1" class="headerlink" title="length"></a>length</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">length</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (value != <span class="keyword">null</span> ? value.length() + suffix.length() :</span><br><span class="line">            emptyValue.length());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="add"><a href="#add" class="headerlink" title="add"></a>add</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> StringJoiner <span class="title">add</span><span class="params">(CharSequence newElement)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//prepareBuilder添加完分隔符或者前缀符之后，再添加newElement</span></span><br><span class="line">    prepareBuilder().append(newElement);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="merge"><a href="#merge" class="headerlink" title="merge"></a>merge</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> StringJoiner <span class="title">merge</span><span class="params">(StringJoiner other)</span> </span>&#123;</span><br><span class="line">    Objects.requireNonNull(other);</span><br><span class="line">    <span class="keyword">if</span> (other.value != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">int</span> length = other.value.length();</span><br><span class="line">        <span class="comment">//执行prepareBuilder</span></span><br><span class="line">        StringBuilder builder = prepareBuilder();</span><br><span class="line">        <span class="comment">//合并other，去掉其前缀</span></span><br><span class="line">        builder.append(other.value, other.prefix.length(), length);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="join"><a href="#join" class="headerlink" title="join"></a>join</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">join</span><span class="params">(CharSequence delimiter, CharSequence... elements)</span> </span>&#123;</span><br><span class="line">    Objects.requireNonNull(delimiter);</span><br><span class="line">    Objects.requireNonNull(elements);</span><br><span class="line">    <span class="comment">//创建一个StringJoiner，分隔符为delimiter</span></span><br><span class="line">    StringJoiner joiner = <span class="keyword">new</span> StringJoiner(delimiter);</span><br><span class="line">    <span class="comment">//把elements按delimiter分隔连接</span></span><br><span class="line">    <span class="keyword">for</span> (CharSequence cs: elements) &#123;</span><br><span class="line">        joiner.add(cs);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> joiner.toString();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">join</span><span class="params">(CharSequence delimiter, Iterable&lt;? extends CharSequence&gt; elements)</span> </span>&#123;</span><br><span class="line">    Objects.requireNonNull(delimiter);</span><br><span class="line">    Objects.requireNonNull(elements);</span><br><span class="line">    StringJoiner joiner = <span class="keyword">new</span> StringJoiner(delimiter);</span><br><span class="line">    <span class="keyword">for</span> (CharSequence cs: elements) &#123;</span><br><span class="line">        joiner.add(cs);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> joiner.toString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="trim"><a href="#trim" class="headerlink" title="trim"></a>trim</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">trim</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> len = value.length;</span><br><span class="line">    <span class="keyword">int</span> st = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">char</span>[] val = value;   </span><br><span class="line">	<span class="comment">//从开头遍历空格</span></span><br><span class="line">    <span class="keyword">while</span> ((st &lt; len) &amp;&amp; (val[st] &lt;= <span class="string">' '</span>)) &#123;</span><br><span class="line">        st++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//遍历结尾的空格</span></span><br><span class="line">    <span class="keyword">while</span> ((st &lt; len) &amp;&amp; (val[len - <span class="number">1</span>] &lt;= <span class="string">' '</span>)) &#123;</span><br><span class="line">        len--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如果st不为0，len不等于value.length，则截取st到len的子字符串</span></span><br><span class="line">    <span class="keyword">return</span> ((st &gt; <span class="number">0</span>) || (len &lt; value.length)) ? substring(st, len) : <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="toString"><a href="#toString" class="headerlink" title="toString"></a>toString</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="toCharArray"><a href="#toCharArray" class="headerlink" title="toCharArray"></a>toCharArray</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">char</span>[] toCharArray() &#123;</span><br><span class="line">    <span class="comment">// 由于类初始化顺序问题，无法使用Arrays.copyOf</span></span><br><span class="line">    <span class="keyword">char</span> result[] = <span class="keyword">new</span> <span class="keyword">char</span>[value.length];</span><br><span class="line">    System.arraycopy(value, <span class="number">0</span>, result, <span class="number">0</span>, value.length);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="valueOf-NaN"><a href="#valueOf-NaN" class="headerlink" title="valueOf"></a>valueOf</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//对象</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">valueOf</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (obj == <span class="keyword">null</span>) ? <span class="string">"null"</span> : obj.toString();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//字符数组</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">valueOf</span><span class="params">(<span class="keyword">char</span> data[])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> String(data);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">valueOf</span><span class="params">(<span class="keyword">char</span> data[], <span class="keyword">int</span> offset, <span class="keyword">int</span> count)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> String(data, offset, count);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//boolean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">valueOf</span><span class="params">(<span class="keyword">boolean</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> b ? <span class="string">"true"</span> : <span class="string">"false"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//字符</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">valueOf</span><span class="params">(<span class="keyword">char</span> c)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> data[] = &#123;c&#125;;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> String(data, <span class="keyword">true</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//int</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">valueOf</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> Integer.toString(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>参考文章：<a href="https://blog.csdn.net/iblade/article/details/78111223" target="_blank" rel="noopener">https://blog.csdn.net/iblade/article/details/78111223</a></p>
+
+      
+    </div>
+    
+    
+    
+
+	<div>
+		  
+			
+		  
+	</div>
+    
+
+    
+
+    
+	<div>
+	  
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+	  
+	</div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/05/剑指offer-栈的压入、弹出序列/" rel="next" title="剑指offer-栈的压入、弹出序列">
+                <i class="fa fa-chevron-left"></i> 剑指offer-栈的压入、弹出序列
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/13/剑指offer-二叉树中和为某一值的路径/" rel="prev" title="剑指offer-二叉树中和为某一值的路径">
+                剑指offer-二叉树中和为某一值的路径 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="白哥">
+            
+              <p class="site-author-name" itemprop="name">白哥</p>
+              <p class="site-description motion-element" itemprop="description">怀远不让我打代码</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">129</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hexo.io/zh-cn/" title="本站使用hexo搭建" target="_blank">本站使用hexo搭建</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#String源码学习"><span class="nav-number">1.</span> <span class="nav-text">String源码学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#变量"><span class="nav-number">1.1.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造函数"><span class="nav-number">1.2.</span> <span class="nav-text">构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#普通方法"><span class="nav-number">1.3.</span> <span class="nav-text">普通方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#checkBounds"><span class="nav-number">1.3.1.</span> <span class="nav-text">checkBounds</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#length"><span class="nav-number">1.3.2.</span> <span class="nav-text">length()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#isEmpty"><span class="nav-number">1.3.3.</span> <span class="nav-text">isEmpty()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#charAt"><span class="nav-number">1.3.4.</span> <span class="nav-text">charAt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getChars"><span class="nav-number">1.3.5.</span> <span class="nav-text">getChars</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#equals"><span class="nav-number">1.3.6.</span> <span class="nav-text">equals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补充：charSequence"><span class="nav-number">1.3.7.</span> <span class="nav-text">补充：charSequence</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#compareTo"><span class="nav-number">1.3.8.</span> <span class="nav-text">compareTo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#startsWith"><span class="nav-number">1.3.9.</span> <span class="nav-text">startsWith</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hashCode"><span class="nav-number">1.3.10.</span> <span class="nav-text">hashCode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#indexOf"><span class="nav-number">1.3.11.</span> <span class="nav-text">indexOf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lastIndexOf"><span class="nav-number">1.3.12.</span> <span class="nav-text">lastIndexOf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#substring"><span class="nav-number">1.3.13.</span> <span class="nav-text">substring</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#concat"><span class="nav-number">1.3.14.</span> <span class="nav-text">concat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#replace"><span class="nav-number">1.3.15.</span> <span class="nav-text">replace</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#contains"><span class="nav-number">1.3.16.</span> <span class="nav-text">contains</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补充：StringJoiner"><span class="nav-number">1.3.17.</span> <span class="nav-text">补充：StringJoiner</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#变量-1"><span class="nav-number">1.3.17.1.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造函数-1"><span class="nav-number">1.3.17.2.</span> <span class="nav-text">构造函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#toString-NaN"><span class="nav-number">1.3.17.3.</span> <span class="nav-text">toString</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#prepareBuilder"><span class="nav-number">1.3.17.4.</span> <span class="nav-text">prepareBuilder</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#length-1"><span class="nav-number">1.3.17.5.</span> <span class="nav-text">length</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#add"><span class="nav-number">1.3.17.6.</span> <span class="nav-text">add</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#merge"><span class="nav-number">1.3.17.7.</span> <span class="nav-text">merge</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#join"><span class="nav-number">1.3.18.</span> <span class="nav-text">join</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#trim"><span class="nav-number">1.3.19.</span> <span class="nav-text">trim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#toString"><span class="nav-number">1.3.20.</span> <span class="nav-text">toString</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#toCharArray"><span class="nav-number">1.3.21.</span> <span class="nav-text">toCharArray</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#valueOf-NaN"><span class="nav-number">1.3.22.</span> <span class="nav-text">valueOf</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">白哥</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+-->
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"superSample":2,"width":200,"height":300,"position":"left","hOffset":40,"vOffset":-5},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+<!-- 页面点击出现社会主义核心价值观 -->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+</html>
